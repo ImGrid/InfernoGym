@@ -4,7 +4,6 @@ steps:
     entrypoint: pip
     args: ['install', '-r', 'backend/requirements.txt']
 
-  # Paso 3: Instalar dependencias de Node para el frontend
   - name: 'node:20.12.2'
     entrypoint: npm
     args: ['install', '--prefix', 'Front']
