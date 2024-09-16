@@ -1,6 +1,6 @@
 steps:
   # Paso 1: Instalar dependencias de Python
-  - name: 'python:3.9'
+  - name: 'python:3.11'
     entrypoint: pip
     args: ['install', '-r', 'backend/requirements.txt']
 
