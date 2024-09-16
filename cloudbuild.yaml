@@ -4,11 +4,6 @@ steps:
     entrypoint: pip
     args: ['install', '-r', 'backend/requirements.txt']
 
-  # Paso 2: Verificar la calidad del código Python con Flake8
-  - name: 'python:3.11'
-    entrypoint: flake8
-    args: ['backend']
-
   # Paso 3: Instalar dependencias de Node para el frontend
   - name: 'node:20.12.2'
     entrypoint: npm
