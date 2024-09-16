@@ -1,0 +1,142 @@
+.historial-entrenador-container {
+    background: radial-gradient(circle, #2A2A2A 10%, #0A0A0A 100%);
+    color: white; /* Texto en blanco */
+    padding: 0px; /* Padding para el contenedor */
+    min-height: 100vh; /* Altura mínima de la vista */
+    max-height: 100vh;
+    overflow-y: auto;
+    font-family: 'Arial', sans-serif;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #000 #000; /* Firefox */
+}
+
+/* Estilos para navegadores WebKit como Chrome, Safari, y Edge */
+.historial-entrenador-container::-webkit-scrollbar {
+    width: 5px; /* Hacer la barra más delgada */
+}
+
+.historial-entrenador-container::-webkit-scrollbar-track {
+    background: #000; /* Color del track */
+}
+
+.historial-entrenador-container::-webkit-scrollbar-thumb {
+    background-color: #000; /* Color del thumb */
+    border-radius: 10px; /* Bordes redondeados para el thumb */
+}
+
+.historial-entrenador-container::-webkit-scrollbar-thumb:hover {
+    background-color: #333; /* Cambio de color al pasar el mouse */
+}
+
+/* Eliminar las flechas de la barra de desplazamiento */
+.historial-entrenador-container::-webkit-scrollbar-button {
+    display: none;
+}
+.historial-entrenador-container .entrenador-header-container .exit-button {
+    background-color: #000;  /* Fondo negro para el botón de salir */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;  /* Asegurarse de que haya espacio alrededor del botón */
+}
+
+.historial-entrenador-container .entrenador-header-container .exit-button:hover {
+    background-color: #333;  /* Efecto hover más oscuro para el botón de salir */
+}
+.historial-entrenador-container button {
+    background-color: #4CAF50; /* Solo botones dentro de .historial-entrenador-container */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.historial-entrenador-container button:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%; /* Ancho completo de la tabla */
+    border-collapse: collapse; /* Los bordes de la tabla colapsados en uno solo */
+    background-color: #A5A6A7; /* Fondo gris claro de la tabla */
+    margin-left: auto; /* Alinear la tabla a la izquierda */
+    border: 1px solid black; /* Bordes negros */
+}
+
+th, td {
+    border: 1px solid black; /* Bordes negros para celdas y encabezados */
+    padding: 8px; /* Espaciado dentro de celdas */
+    text-align: center; /* Alineación del texto al centro */
+    vertical-align: middle; /* Asegura que el contenido de la celda se alinee verticalmente al medio */
+}
+
+th {
+    background-color: #808080; /* Fondo gris oscuro para los encabezados */
+}
+
+.entrenador-header-container {
+    display: flex;
+    justify-content: space-between; /* Centrar el contenido horizontalmente */
+    align-items: center;
+    position: relative; /* Importante para el posicionamiento absoluto del menú desplegable */
+    width: 100%;
+    height: 80px;
+    background-color: #000;
+    padding: 0 20px;
+}
+
+.entrenador-logo {
+
+    height: 140px; /* Ajustar tamaño del logo */
+    width: 140px; /* Ajustar tamaño del logo */
+}
+
+.input-container {
+    position: relative; /* Importante para que el positioning de search-results sea respecto a este contenedor */
+    width: 300px; /* Establece un ancho fijo igual al del input para alineación */
+    margin: auto; /* Centra el contenedor si es necesario */
+}
+
+.search-input {
+    position: relative;
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+}
+
+.search-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #333;
+    color: white;
+    width: 300px; /* Asegura que el ancho coincida con el del input */
+    position: absolute; /* Cambia a posicionamiento absoluto */
+    top: 59px;
+    left: 650px;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.search-results li {
+    padding: 10px;
+    border-bottom: 1px solid #444;
+    cursor: pointer;
+}
+
+.search-results li:last-child {
+    border-bottom: none;
+}
+
+.search-results li:hover {
+    background-color: #555;
+}

@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "date-fns": "^3.6.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.3",
+    "react-confirm-alert": "^3.0.6",
+    "react-toastify": "^10.0.5",
+    "sweetalert2": "^11.12.4",
+    "sweetalert2-react-content": "^5.0.7"
+  }
+}

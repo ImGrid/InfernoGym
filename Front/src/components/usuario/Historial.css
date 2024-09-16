@@ -1,0 +1,109 @@
+.historial-container {
+    background: radial-gradient(circle, #2A2A2A 10%, #0A0A0A 100%);
+    color: white;
+    padding: 0px;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    font-family: 'Arial', sans-serif;
+    /* Personalización de la barra de desplazamiento */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #000 #000; /* Firefox */
+    padding-top: 100px;
+}
+
+/* Estilos para navegadores WebKit como Chrome, Safari, y Edge */
+.historial-container::-webkit-scrollbar {
+    width: 5px; /* Hacer la barra más delgada */
+}
+
+.historial-container::-webkit-scrollbar-track {
+    background: #000; /* Color del track */
+}
+
+.historial-container::-webkit-scrollbar-thumb {
+    background-color: #000; /* Color del thumb */
+    border-radius: 10px; /* Bordes redondeados para el thumb */
+}
+
+.historial-container::-webkit-scrollbar-thumb:hover {
+    background-color: #333; /* Cambio de color al pasar el mouse */
+}
+
+/* Eliminar las flechas de la barra de desplazamiento */
+.historial-container::-webkit-scrollbar-button {
+    display: none;
+}
+
+.historial-container button {
+    background-color: #4CAF50; /* Solo botones dentro de .historial-container */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.historial-container button:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%; /* Ancho completo de la tabla */
+    border-collapse: collapse; /* Los bordes de la tabla colapsados en uno solo */
+    background-color: #A5A6A7; /* Fondo gris claro de la tabla */
+    margin-left: auto; /* Alinear la tabla a la izquierda */
+    border: 1px solid black; /* Bordes negros */
+}
+
+th, td {
+    border: 1px solid black; /* Bordes negros para celdas y encabezados */
+    padding: 8px; /* Espaciado dentro de celdas */
+    text-align: center; /* Alineación del texto al centro puede ayudar */
+    vertical-align: middle; /* Asegura que el contenido de la celda se alinee verticalmente al medio */
+}
+
+th {
+    background-color: #808080; /* Fondo gris oscuro para los encabezados */
+}
+
+.header-container {
+    width: 100%; /* Ancho completo */
+    height: 80px; /* Altura fija para minimizar el espacio */
+    background-color: #000; /* Fondo negro */
+    display: flex;
+    justify-content: space-between; /* Distribuye espacio entre el logo y los botones */
+    align-items: center; /* Alineación vertical de los elementos al centro */
+    padding: 0 20px; /* Padding horizontal para no pegar el logo a los bordes */
+    position: fixed; /* Mantiene el encabezado fijo en la parte superior de la pantalla */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+
+}
+.header-container button {
+    background-color: #000; /* Fondo negro específico para botones en header */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.header-container button:hover {
+    background-color: #333; /* Gris oscuro al pasar el cursor */
+}
+.logo {
+    height: 140px; /* Altura fija para el logo */
+    width: 140; /* Ancho automático basado en la proporción del logo */
+}
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra los botones horizontalmente */
+    flex-grow: 1; /* Ocupar el espacio disponible en el encabezado */
+    gap: 20px; /* Espacio entre botones */
+}

@@ -1,0 +1,116 @@
+/* UserTable.css */
+.container {
+    width: 95%;
+    margin: 20px auto;
+    background-color: #f4f4f4;
+    padding: 0px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-family: 'Arial', sans-serif;
+    overflow: auto; /* Añade desbordamiento automático solo al contenedor de la tabla */
+    max-height: 500px
+}
+
+.user-table-header {
+    width: 100%; /* Utiliza todo el ancho del contenedor */
+    padding: 20px; /* Espacio interno para el encabezado, igualado a CreateUserForm */
+    text-align: center; /* Alinea el texto al centro */
+    background-color: #2E3B4E; /* Fondo oscuro, igual al estilo de .create-user-header */
+    color: white; /* Texto en blanco */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.5); /* Sombra para dar profundidad, igualada */
+    font-size: 24px; /* Tamaño de letra grande para el título, igualado */
+    margin-bottom: 20px; /* Espacio después del encabezado para separar del contenido */
+    font-family: 'Arial', sans-serif;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.user-table th, .user-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    background-color: #ffffff;
+    color: #333;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    border: none;
+    background: none;
+    color: black;
+    cursor: pointer;
+}
+
+.dropdown-content button:hover {
+    background-color: #f1f1f1;
+}
+.user-table th.number-column,
+.user-table td.number-column {
+    width: 50px;  /* Ajusta esto según tus necesidades */
+    min-width: 50px;
+    max-width: 50px;
+    text-align: center; /* Centrar el texto para que se vea ordenado */
+}
+th button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+th:hover .dropdown-content {
+    display: block;
+}
+
+.user-table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.user-table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.user-table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+.date-time {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+.download-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: left;
+    margin-left: 35px;
+}
+
+.download-button:hover {
+    background-color: #0056b3;
+}

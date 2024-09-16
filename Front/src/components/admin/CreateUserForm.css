@@ -1,0 +1,73 @@
+.create-user-container {
+    background: white;
+    padding: 40px; /* Espacio interno aumentado */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    color: black; /* Texto en color negro */
+    width: 95%; /* Ajuste para usar casi todo el ancho de la vista */
+    height: auto; /* Altura automática basada en el contenido */
+    justify-content: center;
+    align-items: center; /* Centra los elementos horizontalmente */
+    font-family: 'Arial', sans-serif; /* Estilo de letra moderno y legible */
+}
+.create-user-header {
+    width: 100%; /* Utiliza todo el ancho del contenedor */
+    padding: 20px; /* Espacio interno para el encabezado */
+    text-align: center; /* Alinea el texto al centro */
+    background-color: #2E3B4E; /* Fondo oscuro, como el estilo de .user-table-header */
+    color: white; /* Texto en blanco */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.5); /* Sombra para dar profundidad */
+    font-size: 24px; /* Tamaño de letra grande para el título */
+    font-family: 'Arial', sans-serif; /* Fuente Arial, consistente con el resto del formulario */
+    margin-bottom: 20px; /* Espacio después del encabezado para separar del formulario */
+}
+.create-user-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas, distribución uniforme */
+    gap: 30px; /* Espacio entre campos aumentado */
+    width: 100%; /* Asegura que el formulario use todo el ancho del contenedor */
+    align-items: start; /* Alinea los elementos al inicio de sus celdas respectivas */
+}
+
+.create-user-form div {
+    display: flex;
+    flex-direction: row; /* Coloca la etiqueta al lado del campo */
+    align-items: center; /* Alinea la etiqueta y el campo en el centro verticalmente */
+    width: 100%; /* Ajusta el ancho para contener label y campo */
+}
+
+.create-user-form label {
+    min-width: 100px; /* Ancho mínimo para las etiquetas */
+    margin-right: 10px; /* Espacio entre la etiqueta y el campo */
+    text-align: left; /* Alineación del texto a la izquierda */
+}
+
+.create-user-form input,
+.create-user-form select {
+    flex-grow: 1; /* Ocupa el espacio restante en la fila */
+    padding: 15px; /* Padding aumentado para más comodidad */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+}
+
+.create-user-form button {
+    grid-column: span 2; /* Hace que el botón se extienda por ambas columnas */
+    padding: 15px 30px; /* Más grande y cómodo */
+    background-color: #007bff;
+    color: white; /* Texto del botón en blanco para contrastar con el fondo azul */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px; /* Espacio adicional antes del botón */
+    width: 20%; /* Ajuste para reducir el ancho del botón */
+    margin-left: auto; /* Centra el botón horizontalmente */
+    margin-right: auto; /* Centra el botón horizontalmente */
+}
+
+.create-user-form button:hover {
+    background-color: #0056b3; /* Oscurece el fondo del botón al pasar el mouse */
+}

@@ -1,0 +1,112 @@
+.reporte-container {
+    background: radial-gradient(circle, #2A2A2A 10%, #0A0A0A 100%);
+    color: white; /* Texto en blanco */
+    padding: 0px; /* Padding para el contenedor */
+    min-height: 100vh; /* Altura mínima de la vista */
+    max-height: 100vh;
+    overflow-y: auto;
+    font-family: 'Arial', sans-serif;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #000 #000; /* Firefox */
+    display: flex; /* Permite centrar el contenido */
+    flex-direction: column; /* Organiza los hijos en columna */
+    padding-top: 100px;
+}
+
+/* Estilos para navegadores WebKit como Chrome, Safari, y Edge */
+.reporte-container::-webkit-scrollbar {
+    width: 5px; /* Hacer la barra más delgada */
+}
+
+.reporte-container::-webkit-scrollbar-track {
+    background: #000; /* Color del track */
+}
+
+.reporte-container::-webkit-scrollbar-thumb {
+    background-color: #000; /* Color del thumb */
+    border-radius: 10px; /* Bordes redondeados para el thumb */
+}
+
+.reporte-container::-webkit-scrollbar-thumb:hover {
+    background-color: #333; /* Cambio de color al pasar el mouse */
+}
+
+/* Eliminar las flechas de la barra de desplazamiento */
+.reporte-container::-webkit-scrollbar-button {
+    display: none;
+}
+.reporte-container button {
+    background-color: #4CAF50; /* Solo botones dentro de .reporte-container */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.reporte-container button:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    background-color: #A5A6A7;
+    margin-left: auto;
+    border: 1px solid black;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+}
+/* Estilos específicos para la columna de comentarios */
+th.comentarios, td.comentarios {
+    width: 25%; /* Asigna un ancho fijo del 25% del total de la tabla a la columna de comentarios */
+    word-wrap: break-word; /* Permite que el texto se ajuste y rompa correctamente dentro de la celda */
+}
+
+
+th {
+    background-color: #808080; /* Fondo gris oscuro para los encabezados */
+}
+
+.header-container {
+    width: 100%; /* Ancho completo */
+    height: 80px; /* Altura fija para minimizar el espacio */
+    background-color: #000; /* Fondo negro */
+    display: flex;
+    justify-content: space-between; /* Distribuye espacio entre el logo y los botones */
+    align-items: center; /* Alineación vertical de los elementos al centro */
+    padding: 0 20px; /* Padding horizontal para no pegar el logo a los bordes */
+}
+
+.header-container button {
+    background-color: #000; /* Fondo negro específico para botones en header */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.header-container button:hover {
+    background-color: #333; /* Gris oscuro al pasar el cursor */
+}
+
+.logo {
+    height: 140px; /* Altura fija para el logo */
+    width: 140px; /* Ancho fijo para mantener la proporción */
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra los botones horizontalmente */
+    flex-grow: 1; /* Ocupar el espacio disponible en el encabezado */
+    gap: 20px; /* Espacio entre botones */
+}

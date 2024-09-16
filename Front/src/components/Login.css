@@ -1,0 +1,66 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background: url('/fondo.jpg') no-repeat center center fixed;
+    background-size: cover; /* Imagen de fondo cubre toda la vista */
+}
+
+.login-form-container {
+    width: 400px; /* Ancho del formulario aumentado */
+    padding: 2.5rem; /* Padding interno aumentado */
+    background: rgba(0, 128, 0, 0.9); /* Fondo verde con transparencia */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 5px 20px 50px #000; /* Sombra para dar profundidad */
+    font-family: 'Arial', sans-serif;
+}
+
+.login-form h1 {
+    text-align: center;
+    color: #fff; /* Texto blanco para el título */
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+.login-form input, .login-form button {
+    display: block;
+    width: 70%; /* Ancho de los campos */
+    margin: 28px auto; /* Espacio incrementado entre los campos */
+    padding: 15px; /* Padding aumentado para más altura en los campos */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.login-form input {
+    background: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+    border: none; /* Sin bordes */
+    color: #000; /* Texto negro para facilitar la lectura */
+}
+
+.login-form button {
+    background-color: #573b8a; /* Color morado para el botón */
+    color: white; /* Texto blanco */
+    cursor: pointer; /* Cursor en forma de puntero */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave al cambiar color */
+}
+
+.login-form button:hover {
+    background-color: #6d44b8; /* Color más oscuro al pasar el ratón */
+}
+
+.error-message {
+    color: red; /* Mensajes de error en rojo */
+    text-align: center; /* Texto centrado */
+    margin-top: 10px; /* Espacio después del mensaje de error */
+}
+* {
+    box-sizing: border-box; /* Asegura que padding y border estén incluidos en el ancho y alto */
+}

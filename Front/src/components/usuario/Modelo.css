@@ -1,0 +1,301 @@
+.modelo-container {
+    background: radial-gradient(circle, #2A2A2A 10%, #0A0A0A 100%);
+    color: #FFFFFF; /* Cambiado a blanco */
+    padding: 0; /* Sin padding */
+    margin: 0; /* Sin margen */
+    min-height: 100vh; /* Altura mínima de la vista */
+    max-height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column; /* Alinear elementos verticalmente */
+    align-items: stretch; /* Alineación para asegurar que los hijos ocupen todo el ancho */
+    width: 100vw; /* Ancho completo de la ventana */
+    font-family: 'Arial', sans-serif;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #000 #000; /* Firefox */
+    justify-content: space-between;
+    padding-top: 80px;
+}
+/* Estilos para navegadores WebKit como Chrome, Safari, y Edge */
+.modelo-container::-webkit-scrollbar {
+    width: 5px; /* Hacer la barra más delgada */
+}
+
+.modelo-container::-webkit-scrollbar-track {
+    background: #000; /* Color del track */
+}
+
+.modelo-container::-webkit-scrollbar-thumb {
+    background-color: #000; /* Color del thumb */
+    border-radius: 10px; /* Bordes redondeados para el thumb */
+}
+
+.modelo-container::-webkit-scrollbar-thumb:hover {
+    background-color: #333; /* Cambio de color al pasar el mouse */
+}
+
+/* Eliminar las flechas de la barra de desplazamiento */
+.modelo-container::-webkit-scrollbar-button {
+    display: none;
+}
+
+.header-container {
+    position: fixed; /* Mantiene el encabezado en una posición fija en la pantalla */
+    top: 0; /* Alinea el encabezado en la parte superior de la pantalla */
+    left: 0; /* Alinea el encabezado a la izquierda de la pantalla */
+    width: 100%; /* Ancho completo para cubrir la parte superior de la pantalla */
+    z-index: 1000; /* Asegura que el encabezado esté por encima de otros elementos */
+    background-color: #000; /* Fondo negro para que el texto sea legible */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra sutil para destacar el encabezado sobre el contenido */
+    height: 80px; /* Altura fija para minimizar el espacio */
+    display: flex;
+    justify-content: space-between; /* Distribuye espacio entre el logo y los botones */
+    align-items: center; /* Alineación vertical de los elementos al centro */
+    padding: 0 20px; /* Padding horizontal para no pegar el logo a los bordes */
+}
+.header-container button {
+    background-color: #000; /* Fondo negro específico para botones en header */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.header-container button:hover {
+    background-color: #333; /* Gris oscuro al pasar el cursor */
+}
+.logo {
+    height: 140px; /* Altura fija para el logo */
+    width: 140; /* Ancho automático basado en la proporción del logo */
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra los botones horizontalmente */
+    flex-grow: 1; /* Ocupar el espacio disponible en el encabezado */
+    gap: 20px; /* Espacio entre botones */
+}
+.welcome-section {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 40%, transparent 70%), url('/gym1.jpg') no-repeat center center; /* Ajusta la URL según sea necesario */    background-size: cover; /* Cubre el área sin estirar la imagen */
+    padding: 350px 20px; /* Ajusta el padding según sea necesario */
+    color: white; /* Texto blanco para mejor visibilidad */
+    text-align: left; /* Alinea el texto a la izquierda */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    height: 300px; /* Altura fija para la sección de bienvenida */
+}
+
+.welcome-section h1 {
+    font-size: 3.5em; /* Aumenta considerablemente el tamaño del título */
+    margin-bottom: 0.5em; /* Reduce el margen inferior para compactar el texto */
+    max-width: 50%;
+    background: -webkit-linear-gradient(orange, red); /* Degradado de naranja a rojo */
+    -webkit-background-clip: text; /* Aplica el fondo solo al texto */
+    -webkit-text-fill-color: transparent; /* Hace que el texto sea transparente para mostrar el fondo */
+    display: inline-block;
+}
+
+.welcome-section p {
+    font-size: 2em; /* Aumenta el tamaño de la descripción */
+    line-height: 1.2; /* Ajusta el interlineado para mejor legibilidad */
+    max-width: 50%;
+}
+
+.instruccion-section {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 40%, transparent 70%), url('/gym2.jpg') no-repeat center center;
+    background-size: cover; /* Asegura que la imagen de fondo cubra toda la sección */
+    padding: 350px 20px; /* Espacio interior para alinear el contenido */
+    color: white; /* Color del texto */
+    text-align: left; /* Alinea el texto a la derecha */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    height: 300px; /* Altura fija para uniformidad */
+}
+.instruccion-section h1 {
+    font-size: 3.5em; /* Aumenta considerablemente el tamaño del título */
+    margin-bottom: 0.5em; /* Reduce el margen inferior para compactar el texto */
+    max-width: 50%; /* Limita el ancho del texto al 50% del ancho de la sección */
+    margin-left: auto;
+    background: -webkit-linear-gradient(orange, red); /* Degradado de naranja a rojo */
+    -webkit-background-clip: text; /* Aplica el fondo solo al texto */
+    -webkit-text-fill-color: transparent; /* Hace que el texto sea transparente para mostrar el fondo */
+    display: inline-block;
+}
+
+.instruccion-section p {
+    font-size: 2em; /* Aumenta el tamaño de la descripción */
+    line-height: 1.2; /* Ajusta el interlineado para mejor legibilidad */
+    max-width: 50%; /* Limita el ancho del texto al 50% del ancho de la sección */
+    margin-left: auto;
+}
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.upload-container {
+    border: 2px dashed #ccc;
+    padding: 30px; /* Aumento del padding para más espacio interior */
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s;
+    width: 70%; /* Ancho más grande */
+    max-width: 700px; /* Máximo ancho para evitar que sea demasiado grande */
+    height: auto; /* Altura automática basada en el contenido */
+    display: flex;
+    flex-direction: column; /* Orientación vertical */
+    align-items: center; /* Centrar contenido horizontalmente */
+    justify-content: center; /* Centrar contenido verticalmente */
+}
+
+.upload-container:hover {
+    background-color: #e8e8e8;
+}
+
+.upload-content i {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.upload-content p {
+    color: #666;
+    font-size: 16px;
+}
+.gif-display {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    width: 100%; /* Asegura que ocupa todo el ancho disponible */
+    margin-top: 20px; /* Espacio arriba del contenedor para separarlo de los botones */
+    gap: 30px; /* Espacio entre el GIF y la descripción */
+}
+
+.exercise-gif {
+    max-width: 50%; /* Máximo 50% del ancho para no sobrepasar el espacio */
+    height: auto; /* Mantiene la proporción del GIF */
+}
+
+.exercise-description {
+    width: 30%; /* Ocupa el 50% del espacio restante */
+    font-size: 20px; /* Tamaño de fuente más grande */
+    color: white; /* Color de fuente blanco */
+    padding: 10px;
+    text-align: justify; /* Justifica el texto para alinear uniformemente */
+    margin-left: 30px; /* Margen izquierdo para separar del GIF */
+}
+.upload-button {
+    margin-top: 20px; /* Espacio entre el contenedor y el botón */
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.exercise-button-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 40px;
+    width: 80%;
+}
+
+.exercise-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    fontSize: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.exercise-button:hover {
+    background-color: darkred;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;  /* Asegura que los elementos se ajusten según el espacio disponible */
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #000;
+    color: white;
+}
+
+.footer-map, .footer-info {
+    margin: 10px; /* Espacio alrededor para evitar que los elementos estén demasiado juntos */
+}
+
+.footer-map iframe {
+    width: 100%; /* Asegura que el iframe use todo el ancho del contenedor */
+    max-width: 250px; /* Reduce el ancho máximo del mapa */
+    height: 200px; /* Mantiene la altura fija */
+    border: none; /* Elimina cualquier borde */
+}
+
+.footer-info {
+    flex: 2; /* Toma el doble del espacio que el mapa */
+    display: flex;
+    justify-content: space-between; /* Separa correctamente las dos columnas de texto */
+    width: 100%; /* Utiliza todo el espacio restante */
+}
+
+.footer-info-left, .footer-info-right {
+    flex: 1; /* Cada columna toma una porción igual del espacio disponible */
+    padding: 0 10px; /* Espaciado interno para no pegar el texto a los bordes */
+}
+
+.footer-info-left {
+    margin-right: 30px; /* Añade un margen a la derecha para separar las columnas de texto */
+}
+
+.footer-info h3, .footer-info p {
+    margin-bottom: 10px; /* Espaciado debajo de cada elemento para claridad */
+}
+
+.footer-info a {
+    color: #CCC; /* Color para los enlaces */
+    text-decoration: none; /* Sin subrayado */
+    transition: color 0.3s ease; /* Transición suave al cambiar el color */
+}
+
+.footer-info a:hover {
+    color: #FFF; /* Color al pasar el ratón */
+}
+h1, p {
+
+    color: #ffffff;
+}
+.button-base {
+    padding: 12px 24px;  /* Ajusta el tamaño del relleno según tus necesidades */
+    font-size: 16px;  /* Tamaño de fuente estándar */
+    color: white;  /* Color de texto */
+    background-color: red;  /* Color de fondo */
+    border: none;  /* Sin bordes */
+    border-radius: 10px;  /* Bordes redondeados */
+    cursor: pointer;  /* Cursor de tipo 'mano' al pasar el ratón */
+    transition: background-color 0.3s ease-in-out;  /* Transición suave del color de fondo */
+}
+
+.button-base:hover {
+    background-color: darkred;  /* Color de fondo al pasar el ratón */
+}
+.probar-ahora-button {
+    width: auto; /* Ajusta automáticamente el ancho según el contenido */
+    max-width: 200px; /* Establece un ancho máximo para evitar que sea demasiado ancho */
+    margin-left: 0; /* Alinea el botón a la izquierda con el texto */
+}
+
+

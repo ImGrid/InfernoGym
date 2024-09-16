@@ -1,0 +1,53 @@
+/* UserDetailsModal.css */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background: white;
+    padding: 20px; /* Reducción del padding para menos espacio interno */
+    width: 30%; /* Reducción del ancho para que no parezca tan grande */
+    max-width: 500px; /* Ajuste del ancho máximo */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reducción del gap para menos espacio entre elementos */
+}
+
+.modal h2 {
+    margin-top: 0;
+    margin-bottom: 10px; /* Espacio después del título */
+    color: #333;
+    font-size: 20px; /* Reducción del tamaño de fuente para los títulos */
+}
+
+.modal p {
+    margin: 5px 0; /* Reducción del margen para menos espacio entre párrafos */
+    color: #333;
+    font-size: 16px; /* Reducción del tamaño de fuente para el contenido */
+}
+
+.modal button {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Ajuste del padding para botones más pequeños */
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px; /* Ajuste del tamaño de fuente para los botones */
+    width: auto; /* Los botones ya no toman todo el ancho disponible */
+}
+
+.modal button.delete-button {
+    background-color: #dc3545; /* Rojo más intenso para el botón Borrar */
+}
