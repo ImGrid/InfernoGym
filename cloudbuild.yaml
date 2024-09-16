@@ -27,7 +27,7 @@ substitutions:
   _PROJECT_ID: 'gyminferno'
 
 # Opciones para aumentar el tiempo de espera si tu compilación necesita más tiempo
-timeout: '1600s'
+timeout: '7200s'
 
 # Definición de recursos para la compilación
 options:
@@ -40,3 +40,6 @@ artifacts:
     paths: ['Front/dist/**', 'backend/app.py']
     
 logsBucket: 'gs://gyminferno.appspot.com'
+
+options:
+  machineType: 'E2_HIGHCPU_8' 
