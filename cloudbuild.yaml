@@ -1,11 +1,11 @@
 steps:
   # Paso 1: Instalar dependencias de Python
-  - name: 'python:3.9'
+  - name: 'python:3.10'
     entrypoint: pip
     args: ['install', '-r', 'backend/requirements.txt']
 
   # Paso 2: Verificar la calidad del código Python con Flake8
-  - name: 'python:3.9'
+  - name: 'python:3.10'
     entrypoint: flake8
     args: ['backend']
 
@@ -20,7 +20,7 @@ steps:
     args: ['run', 'build', '--prefix', 'Front']
 
   # Paso 5: Pruebas unitarias del backend (opcional)
-  - name: 'python:3.9'
+  - name: 'python:3.10'
     entrypoint: pytest
     args: ['backend/tests']
 
