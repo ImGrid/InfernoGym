@@ -1,0 +1,51 @@
+steps:
+  # Paso 1: Instalar dependencias de Python
+  - name: 'python:3.9'
+    entrypoint: pip
+    args: ['install', '-r', 'backend/requirements.txt']
+
+  # Paso 2: Verificar la calidad del código Python con Flake8
+  - name: 'python:3.9'
+    entrypoint: flake8
+    args: ['backend']
+
+  # Paso 3: Instalar dependencias de Node para el frontend
+  - name: 'node:14'
+    entrypoint: npm
+    args: ['install', '--prefix', 'Front']
+
+  # Paso 4: Construir el proyecto de frontend con Vite
+  - name: 'node:14'
+    entrypoint: npm
+    args: ['run', 'build', '--prefix', 'Front']
+
+  # Paso 5: Pruebas unitarias del backend (opcional)
+  - name: 'python:3.9'
+    entrypoint: pytest
+    args: ['backend/tests']
+
+  # Paso 6: Copiar archivos estáticos al bucket de Google Cloud Storage
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', '-r', 'Front/dist', 'gs://gyminferno_static']
+
+  # Paso 7: Despliegue de la aplicación usando gcloud
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['app', 'deploy', 'app.yaml', '--project=gyminferno']
+
+# Variables de entorno requeridas para los pasos
+substitutions:
+  _PROJECT_ID: 'gyminferno'
+
+# Opciones para aumentar el tiempo de espera si tu compilación necesita más tiempo
+timeout: '1600s'
+
+# Definición de recursos para la compilación
+options:
+  machineType: 'E2_HIGHCPU_8'
+
+# Especificaciones para almacenar imágenes construidas o artefactos
+artifacts:
+  objects:
+    location: 'gs://gyminferno_artifacts/'
+    paths: ['Front/dist/**', 'backend/app.py']
