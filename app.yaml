@@ -3,7 +3,7 @@ entrypoint: python app.py
 
 handlers:
 - url: /static
-  static_dir: Front/static/
+  static_dir: Front/
 - url: /.*\.(js|css|png|jpg|jpeg|svg|json|ico)
   static_files: Front/src/\1
   upload: Front/src/.*\.(js|jsx|css|png|jpg|jpeg|svg|json|ico)$
