@@ -49,3 +49,5 @@ artifacts:
   objects:
     location: 'gs://gyminferno_artifacts/'
     paths: ['Front/dist/**', 'backend/app.py']
+    
+logsBucket: 'gs://gyminferno.appspot.com'
