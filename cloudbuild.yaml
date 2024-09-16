@@ -15,7 +15,7 @@ steps:
 
   # Paso 6: Copiar archivos estáticos al bucket de Google Cloud Storage
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['cp', '-r', 'Front/dist', 'gs://gyminferno_static']
+    args: ['cp', '-r', 'Front', 'gs://gyminferno_static']
 
   # Paso 7: Despliegue de la aplicación usando gcloud
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
