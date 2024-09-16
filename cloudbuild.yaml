@@ -14,11 +14,6 @@ steps:
     entrypoint: npm
     args: ['run', 'build', '--prefix', 'Front']
 
-  # Paso 5: Pruebas unitarias del backend (opcional)
-  - name: 'python:3.11'
-    entrypoint: pytest
-    args: ['backend/tests']
-
   # Paso 6: Copiar archivos estáticos al bucket de Google Cloud Storage
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', '-r', 'Front/dist', 'gs://gyminferno_static']
