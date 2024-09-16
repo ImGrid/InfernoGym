@@ -5,15 +5,37 @@
 #
 # For more information, run:
 #   $ gcloud topic gcloudignore
-#
-.gcloudignore
-# If you would like to upload your .git directory, .gitignore file or files
-# from your .gitignore file, remove the corresponding line
-# below:
-.git
+
+# Git directories and files
+.git/
 .gitignore
 
-# Python pycache:
+# Python cache directories
 __pycache__/
-# Ignored by the build system
+*.pyc
+
+# Node.js dependencies
+node_modules/
+
+# Frontend build artifacts
+/dist/
+/build/
+/public/
+
+# Virtual environments
+venv/
+env/
+
+# Environment configuration files
+*.env
+*.config.js
+
+# Setup configuration
 /setup.cfg
+
+# Logs and documentation
+*.log
+*.md
+
+# Other unnecessary files or directories
+other_temporary_directory/
