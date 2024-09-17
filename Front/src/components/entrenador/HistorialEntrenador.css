@@ -59,7 +59,7 @@
     background-color: #45a049;
 }
 
-table {
+.historial-entrenador-container table {
     width: 100%; /* Ancho completo de la tabla */
     border-collapse: collapse; /* Los bordes de la tabla colapsados en uno solo */
     background-color: #A5A6A7; /* Fondo gris claro de la tabla */
@@ -67,7 +67,6 @@ table {
 }
 
 th, td {
-    border: 1px solid black; /* Bordes negros para celdas y encabezados */
     padding: 8px; /* Espaciado dentro de celdas */
     text-align: center; /* Alineación del texto al centro */
     vertical-align: middle; /* Asegura que el contenido de la celda se alinee verticalmente al medio */

@@ -1,16 +1,17 @@
 .reporte-container {
     background: radial-gradient(circle, #2A2A2A 10%, #0A0A0A 100%);
-    color: white; /* Texto en blanco */
-    padding: 0px; /* Padding para el contenedor */
-    min-height: 100vh; /* Altura mínima de la vista */
+    color: white;
+    padding: 20px 50px;
+    min-height: 100vh;
     max-height: 100vh;
     overflow-y: auto;
     font-family: 'Arial', sans-serif;
+    /* Personalización de la barra de desplazamiento */
     scrollbar-width: thin; /* Firefox */
     scrollbar-color: #000 #000; /* Firefox */
-    display: flex; /* Permite centrar el contenido */
-    flex-direction: column; /* Organiza los hijos en columna */
     padding-top: 100px;
+    display: flex;        /* Añadido para permitir centrar los contenidos */
+    flex-direction: column; /* Añadido para estructurar correctamente los elementos como columnas */
 }
 
 /* Estilos para navegadores WebKit como Chrome, Safari, y Edge */
@@ -49,30 +50,45 @@
     background-color: #45a049;
 }
 
-table {
-    width: 90%;
-    border-collapse: collapse;
-    background-color: #A5A6A7;
-    margin-left: auto;
+.reporte-container table {
+    width: 100%; /* Ajuste del ancho */
+    border-collapse: separate; /* Esto permite el manejo independiente de bordes */
+    border-spacing: 0; /* Elimina el espacio entre las celdas */
+    margin: 20px auto; /* Centrado y espacio alrededor de la tabla */
+    background-color: transparent;
 }
 
-th, td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: center;
+.reporte-container th, td {
+    border: none; /* Bordes negros para celdas y encabezados */
+    padding: 8px; /* Espaciado dentro de celdas */
+    text-align: center; /* Alineación del texto al centro puede ayudar */
     vertical-align: middle;
 }
 /* Estilos específicos para la columna de comentarios */
-th.comentarios, td.comentarios {
+.reporte-container th.comentarios, td.comentarios {
     width: 25%; /* Asigna un ancho fijo del 25% del total de la tabla a la columna de comentarios */
     word-wrap: break-word; /* Permite que el texto se ajuste y rompa correctamente dentro de la celda */
 }
 
 
-th {
+.reporte-container th {
     background-color: #808080; /* Fondo gris oscuro para los encabezados */
+    color: white; /* Texto blanco para los encabezados */
+    border: 1px solid black; /* Fondo gris oscuro para los encabezados */
+}
+.reporte-container thead tr {
+    border-radius: 20px; /* Bordes redondeados para el bloque de encabezados */
 }
 
+.reporte-container th:first-child {
+    border-top-left-radius: 20px; /* Redondea solo la esquina superior izquierda */
+    border-bottom-left-radius: 20px; /* Redondea solo la esquina inferior izquierda */
+}
+
+.reporte-container th:last-child {
+    border-top-right-radius: 20px; /* Redondea solo la esquina superior derecha */
+    border-bottom-right-radius: 20px; /* Redondea solo la esquina inferior derecha */
+}
 .header-container {
     width: 100%; /* Ancho completo */
     height: 80px; /* Altura fija para minimizar el espacio */

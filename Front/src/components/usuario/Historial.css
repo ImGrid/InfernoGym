@@ -53,7 +53,7 @@
 }
 
 .historial-container .historial-table {
-    width: 90%; /* Ajuste del ancho */
+    width: 100%; /* Ajuste del ancho */
     border-collapse: separate; /* Esto permite el manejo independiente de bordes */
     border-spacing: 0; /* Elimina el espacio entre las celdas */
     margin: 20px auto; /* Centrado y espacio alrededor de la tabla */
@@ -87,6 +87,7 @@
     border-top-right-radius: 20px; /* Redondea solo la esquina superior derecha */
     border-bottom-right-radius: 20px; /* Redondea solo la esquina inferior derecha */
 }
+
 .header-container {
     width: 100%; /* Ancho completo */
     height: 80px; /* Altura fija para minimizar el espacio */
