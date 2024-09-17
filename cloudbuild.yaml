@@ -8,15 +8,12 @@ steps:
     entrypoint: npm
     args: ['install', '--prefix', 'Front']
 
-  # Paso 4: Construir el proyecto de frontend con vite
   - name: 'node:20.12.2'
     entrypoint: npm
     args: ['run', 'build', '--prefix', 'Front']
 
-  # Paso 6: Copiar archivos estáticos al bucket de Google Cloud Storage
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['cp', '-r', 'Front/dist', 'gs://gyminferno_static/Front']
-    # Asegurarse de que la carpeta dist del frontend se suba correctamente
+    args: ['cp', '-r', 'Front', 'gs://gyminferno_static']
 
   # Copiar los archivos del backend al bucket
   - name: 'gcr.io/cloud-builders/gsutil'

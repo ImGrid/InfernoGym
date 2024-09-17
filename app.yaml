@@ -7,9 +7,9 @@ handlers:
   static_dir: Front/public
 
 # Handler for JavaScript, CSS, images, and other static files inside src
-- url: /src/(.*)
-  static_files: src/\1
-  upload: src/.*\.(js|jsx|css|png|jpg|jpeg|svg|json|ico)$
+- url: /src
+  static_files: Front/src/\1
+  upload: Front/src/.*\.(js|jsx|css|png|jpg|jpeg|svg|json|ico)$
 
 # Handler for the main HTML entry point
 - url: /

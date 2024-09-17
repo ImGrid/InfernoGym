@@ -64,7 +64,6 @@ table {
     border-collapse: collapse; /* Los bordes de la tabla colapsados en uno solo */
     background-color: #A5A6A7; /* Fondo gris claro de la tabla */
     margin-left: auto; /* Alinear la tabla a la izquierda */
-    border: 1px solid black; /* Bordes negros */
 }
 
 th, td {

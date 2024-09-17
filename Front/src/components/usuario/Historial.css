@@ -63,7 +63,7 @@
 
 .historial-container .historial-table th,
 .historial-container .historial-table td {
-    border: 1px solid black; /* Bordes negros para celdas y encabezados */
+    border: none; /* Bordes negros para celdas y encabezados */
     padding: 8px; /* Espaciado dentro de celdas */
     text-align: center; /* Alineación del texto al centro puede ayudar */
     vertical-align: middle; /* Asegura que el contenido de la celda se alinee verticalmente al medio */
@@ -72,13 +72,10 @@
 .historial-container .historial-table th {
     background-color: #808080; /* Fondo gris oscuro para los encabezados */
     color: white; /* Texto blanco para los encabezados */
-    padding: 8px; /* Espaciado dentro de celdas */
-    text-align: center; /* Alineación del texto al centro */
+    border: 1px solid black; /* Mantén los bordes solo para th */
 }
 .historial-container .historial-table thead tr {
     border-radius: 20px; /* Bordes redondeados para el bloque de encabezados */
-    overflow: hidden; /* Oculta cualquier contenido que se salga del borde redondeado */
-    border: 1px solid black; /* Borde para el bloque de encabezados */
 }
 
 .historial-container .historial-table th:first-child {
