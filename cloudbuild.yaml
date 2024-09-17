@@ -15,13 +15,24 @@ steps:
 
   # Paso 6: Copiar archivos estáticos al bucket de Google Cloud Storage
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['cp', '-r', 'Front', 'gs://gyminferno_static']
+    args: ['cp', '-r', 'Front/dist', 'gs://gyminferno_static/Front']
+    # Asegurarse de que la carpeta dist del frontend se suba correctamente
+
+  # Copiar los archivos del backend al bucket
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', '-r', 'backend', 'gs://gyminferno_static/backend']
+    # Copiar toda la carpeta backend
+
+  # Incluir la carpeta path en el bucket
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', '-r', 'path', 'gs://gyminferno_static/path']
+    # Copiar toda la carpeta path
 
   # Paso 7: Despliegue de la aplicación usando gcloud
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args: ['app', 'deploy', 'app.yaml', '--project=gyminferno']
-    
+
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args: ['app', 'deploy', 'app.yaml', '--project=gyminferno', '--quiet']
@@ -41,7 +52,7 @@ options:
 artifacts:
   objects:
     location: 'gs://gyminferno_artifacts/'
-    paths: ['Front/dist/**', 'backend/app.py']
-    
-logsBucket: 'gs://gyminferno.appspot.com'
+    paths: ['Front/dist/**', 'backend/**', 'path/**']
+    # Incluir todos los archivos necesarios del backend y la carpeta path
 
+logsBucket: 'gs://gyminferno.appspot.com'

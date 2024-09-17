@@ -76,7 +76,7 @@ function Historial() {
                 </div>
             </div>
             <h1>Historial de Usuario</h1>
-            <table>
+            <table className="historial-table">
                 <thead>
                     <tr>
                         <th>Video</th>
