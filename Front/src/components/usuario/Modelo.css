@@ -106,39 +106,58 @@
 }
 
 .instruccion-section {
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 40%, transparent 70%), url('/gym2.jpg') no-repeat center center;
-    background-size: cover; /* Asegura que la imagen de fondo cubra toda la sección */
-    padding: 350px 20px; /* Espacio interior para alinear el contenido */
-    color: white; /* Color del texto */
-    text-align: left; /* Alinea el texto a la derecha */
+    display: flex;
+    flex-direction: row; /* Alinea los elementos en fila */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    padding: 90px 20px; /* Espacio alrededor del contenido */
+    background: radial-gradient(circle, #2A2A2A 10%, #0A0A0A 100%);
+    border-bottom: 2px solid #444; /* Línea de separación estilizada */
+}
+
+.instruccion-image {
+    flex: 1; /* Ocupa la mitad del espacio disponible */
+    max-width: 50%; /* Limita el ancho de la imagen al 50% del contenedor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instruccion-image img {
+    width: 100%; /* Ajusta la imagen para que ocupe el espacio designado */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Sombra para dar profundidad */
+}
+
+.instruccion-text {
+    flex: 1; /* Ocupa la otra mitad del espacio disponible */
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra el contenido verticalmente */
-    height: 300px; /* Altura fija para uniformidad */
+    align-items: start; /* Alinea el texto al inicio del contenedor */
+    justify-content: center;
+    padding-left: 50px; /* Añade padding a la izquierda para separar texto de la imagen */
 }
-.instruccion-section h1 {
-    font-size: 3.5em; /* Aumenta considerablemente el tamaño del título */
+.instruccion-text h1 {
+    font-size: 2em; /* Aumenta considerablemente el tamaño del título */
     margin-bottom: 0.5em; /* Reduce el margen inferior para compactar el texto */
-    max-width: 50%; /* Limita el ancho del texto al 50% del ancho de la sección */
-    margin-left: auto;
     background: -webkit-linear-gradient(orange, red); /* Degradado de naranja a rojo */
     -webkit-background-clip: text; /* Aplica el fondo solo al texto */
     -webkit-text-fill-color: transparent; /* Hace que el texto sea transparente para mostrar el fondo */
     display: inline-block;
 }
 
-.instruccion-section p {
-    font-size: 2em; /* Aumenta el tamaño de la descripción */
+.instruccion-text p {
+    font-size: 1.5em; /* Aumenta el tamaño de la descripción */
     line-height: 1.2; /* Ajusta el interlineado para mejor legibilidad */
-    max-width: 50%; /* Limita el ancho del texto al 50% del ancho de la sección */
-    margin-left: auto;
 }
+
 .upload-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 20px 0;
+    margin: 90px 0;
 }
 
 .upload-container {

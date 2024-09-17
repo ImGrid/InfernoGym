@@ -9,21 +9,30 @@ function Modelo() {
     const [file, setFile] = useState(null);
     const [uploading, setUploading] = useState(false);
     const [currentGif, setCurrentGif] = useState('bicep.gif');
-    const [currentDescription, setCurrentDescription] = useState('Grabate a ti mismo de perfil izquierdo realizando el ejercicio de curl de bicep con barra como se muestra en el ejemplo');
+    const [currentDescription, setCurrentDescription] = useState('Grabate a ti mismo de PERFIL IZQUIERDO realizando el ejercicio de curl de bicep con barra como se muestra en el ejemplo, los puntos clave que reconocera en este ejercicio son tu hombro, codo y muñeca izquierda');
     const [currentExercise, setCurrentExercise] = useState('bicep');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const navigate = useNavigate();
 
 
     const gifs = {
-        bicep: { gif: 'bicep.gif', description: 'Grabate a ti mismo de perfil izquierdo realizando el ejercicio de curl de bicep con barra como se muestra en el ejemplo' },
+        bicep: { gif: 'bicep.gif', description: 'Grabate a ti mismo de PERFIL IZQUIERDO realizando el ejercicio de curl de bicep con barra como se muestra en el ejemplo' },
         sentadilla: { gif: 'sentadilla.gif', description: 'Grabate a ti mismo de perfil del lado derecho para que la IA pueda calcular los puntos clave del ejercicio de sentadilla' },
         hombros: { gif: 'hombros.gif', description: 'Grabate a ti mismo de de frente realizando el ejercicio de press de hombros como se muestra en el ejemplo' },
         triceps: { gif: 'triceps.gif', description: 'Grabate a ti mismo de perfil derecho realizando el ejercicio de extension de triceps en polea como se muestra en el ejemplo' }
     };
 
     const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
+        const file = event.target.files[0];
+        if (file) {
+            // Convertir bytes a MB
+            const fileSizeInMB = file.size / 1024 / 1024;
+            if (fileSizeInMB > 100) {
+                toast.error("El archivo excede el tamaño máximo permitido de 100 MB.");
+                return; // Terminar la ejecución si el archivo es demasiado grande
+            }
+            setFile(file);
+        }
     };
 
     const handleUpload = async () => {
@@ -59,24 +68,40 @@ function Modelo() {
             <div className="header-container">
                 <img src="/logo_gym.png" alt="Logo del gimnasio" className="logo"/>
                 <div className="button-container">
-                    <button onClick={() => navigate('/usuario/historial')}>Ver Historial</button>
-                    <button onClick={() => navigate('/usuario/reporte')}>Ver Reportes</button>
+                    <button onClick={() => navigate('/usuario/historial')} disabled={uploading}>Ver Historial</button>
+                    <button onClick={() => navigate('/usuario/reporte')} disabled={uploading}>Ver Reportes</button>
                     <button onClick={() => {
-                        localStorage.removeItem('user');
-                        window.location.href = '/';
-                    }}>Salir</button>
+                        if (!uploading) {  // Solo permite salir si no está cargando
+                            localStorage.removeItem('user');
+                            window.location.href = '/';
+                        }
+                    }} disabled={uploading}>Salir</button>
                 </div>
             </div>
             <div className="welcome-section">
                 <h1>BIENVENIDO AL GIMNASIO INFERNO GYM </h1>
-                <p>Empieza tu entrenamiento con nosotros, grabate realizando los ejercicios disponibles y subiendolos a la pagina para ser procesados con IA</p>
+                <p>Empieza tu entrenamiento con nosotros y prueba el nuevo modelo de reconocimiento de postura</p>
                 <button onClick={scrollToUploadSection} className="button-base probar-ahora-button">
                     Probar Ahora
                 </button>
             </div>
             <div className="instruccion-section">
-                <h1>¿COMO USAR EL MODELO DE IA?</h1>
-                <p>Con tu celular o algun dispositivo grabate realizando los 4 ejercicios que estan disponibles, ya sea del lado izquierdo o derecho como indica el ejemplo, recuerda grabarte desde un angulo que se vea todo tu cuerpo</p>
+                <div className="instruccion-image">
+                    <img src="/public/gym2.gif" alt="Instrucción" />
+                    </div>
+                    <div className="instruccion-text">
+                        <h1>¿QUE ES LO QUE HACE EL MODELO DE RECONOCIMIENTO?</h1>
+                        <p>Reconoce los puntos clave de tu cuerpo y resalta los puntos clave del ejercicio que estas realizando para indicarte la posicion correcta</p>
+                </div>
+            </div>
+            <div className="instruccion-section">
+                <div className="instruccion-image">
+                    <img src="/public/gym3.gif" alt="Instrucción" />
+                    </div>
+                    <div className="instruccion-text">
+                        <h1>¿COMO USAR EL MODELO DE RECONOCIMIENTO?</h1>
+                        <p>Puedes grabarte con tu celular u otro dispositivo realizando los ejercicios como indica el ejemplo para luego subir ese video a la pagina, recuerda que debes grabarte desde un angulo en el que se vea todo tu cuerpo</p>
+                </div>
             </div>
             <div id="uploadSection" className="upload-section">
                 <div className="upload-container" onClick={() => document.getElementById('fileInput').click()}>

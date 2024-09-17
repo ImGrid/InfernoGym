@@ -75,7 +75,7 @@ function Historial() {
                     }}>Salir</button>
                 </div>
             </div>
-            <h1>Historial de Usuario <button onClick={toggleShowRecent} style={{ backgroundColor: 'red', color: 'white' }}>{showRecent ? "Ver Últimos" : "Ver Recientes"}</button></h1>
+            <h1>Historial de Usuario</h1>
             <table>
                 <thead>
                     <tr>
