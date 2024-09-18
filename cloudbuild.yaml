@@ -24,7 +24,7 @@ steps:
     entrypoint: gcloud
     args: ['app', 'deploy', 'app.yaml', '--project=infernogym', '--quiet']
 
-# Variables de entorno requeridas para los paso
+# Variables de entorno requeridas para los pasos
 substitutions:
   _PROJECT_ID: 'infernogym'
 
