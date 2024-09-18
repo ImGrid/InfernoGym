@@ -5,9 +5,17 @@ handlers:
 - url: /(.*\.(js|jsx|css|png|jpg|jpeg|svg|json|ico))$
   static_files: Front/\1
   upload: Front/.*\.(js|jsx|css|png|jpg|jpeg|svg|json|ico)$
+  mime_type: text/javascript
+
+- url: /(.*\.(css|png|jpg|jpeg|svg|gif|ico|json))$
+  static_files: Front/public/\1
+  upload: Front/public/.*\.(css|png|jpg|jpeg|svg|gif|ico|json)$
 
 - url: /.*
-  static_dir: Front
+  static_dir: Front/public
+
+- url: /.*
+  static_dir: Front/src
 # Handler for the main HTML entry point
 - url: /
   static_files: Front/index.html

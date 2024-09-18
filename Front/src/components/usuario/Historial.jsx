@@ -3,15 +3,18 @@ import { fetchVideosByUser, getVideoById, deleteVideo, eliminarReporte, obtenerR
 import { ToastContainer, toast } from 'react-toastify'; // Importa las funciones de toastify
 import 'react-toastify/dist/ReactToastify.css'; // Importa el CSS para react-toastify
 import './Historial.css';
-import { format, parseISO } from 'date-fns';
+import { format, parseISO, isAfter, isBefore } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 
 function Historial() {
     const [videos, setVideos] = useState([]);
     const navigate = useNavigate();
     const [filter, setFilter] = useState('');
+    const [filteredVideos, setFilteredVideos] = useState([]);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [showExerciseSelect, setShowExerciseSelect] = useState(false); // Nuevo estado para mostrar el select de ejercicios
+    const [selectedExercise, setSelectedExercise] = useState('');
     const [showDateInputs, setShowDateInputs] = useState(false);
     const formatDate = (dateString) => {
         try {
@@ -26,6 +29,31 @@ function Historial() {
         loadVideos();
     }, [filter, startDate, endDate]);
 
+    useEffect(() => {
+        if (selectedExercise) {
+            const filtered = videos.filter((video) =>
+                video.descripcion.toLowerCase().includes(selectedExercise.toLowerCase())
+            );
+            setFilteredVideos(filtered);
+        } else if (startDate && endDate) {
+            // Nuevo código: Validar que la fecha "desde" no sea mayor que la fecha "hasta"
+            if (isAfter(parseISO(startDate), parseISO(endDate))) {
+                toast.error('La fecha "Desde" no puede ser mayor que la fecha "Hasta"'); // Mostrar mensaje de error
+                setFilteredVideos(videos); // Mostrar todos los videos sin aplicar el filtro
+            } else {
+                // Nuevo código: Filtrar videos por el rango de fechas
+                const filteredByDate = videos.filter((video) => {
+                    const videoDate = parseISO(video.fecha_subida);
+                    const isWithinRange = isAfter(videoDate, parseISO(startDate)) && isBefore(videoDate, parseISO(endDate));
+                    return isWithinRange;
+                });
+                setFilteredVideos(filteredByDate);
+            }
+        } else {
+            setFilteredVideos(videos);
+        }
+    }, [selectedExercise, videos, startDate, endDate]);
+
     const loadVideos = async () => {
         const userId = JSON.parse(localStorage.getItem('user')).userId;
         const fetchedVideos = await fetchVideosByUser(userId);
@@ -34,11 +62,14 @@ function Historial() {
             return { ...video, url };
         }));
         setVideos(videosWithUrls);
+        setFilteredVideos(videosWithUrls); //Nuevo codigo: Inicializa filteredVideos con todos los videos cargados
     };
 
     const handleFilterChange = (event) => {
-        setFilter(event.target.value);
-        setShowDateInputs(event.target.value === 'fecha');
+        const selectedFilter = event.target.value;
+        setFilter(selectedFilter);
+        setShowDateInputs(selectedFilter === 'fecha');
+        setShowExerciseSelect(selectedFilter === 'tipo'); // Muestra el botón "Seleccionar" cuando se elige "tipo"
     };
     const handleDateChange = (event) => {
         if (event.target.name === 'fecha_desde') {
@@ -46,6 +77,9 @@ function Historial() {
         } else if (event.target.name === 'fecha_hasta') {
             setEndDate(event.target.value);
         }
+    };
+    const handleExerciseChange = (event) => {
+        setSelectedExercise(event.target.value); // Cambia el ejercicio seleccionado
     };
     const handleDeleteVideo = async (videoId) => {
         try {
@@ -77,17 +111,40 @@ function Historial() {
                 </div>
             </div>
             <h1>Historial de Usuario</h1>
-            <select onChange={handleFilterChange} className="filter-button">
-                <option value="">Filtrar por</option>
-                <option value="fecha">Fecha</option>
-                <option value="tipo">Tipo de ejercicio</option>
-            </select>
-            {showDateInputs && (
-                <div>
-                    <input type="date" name="fecha_desde" value={startDate} onChange={handleDateChange} />
-                    <input type="date" name="fecha_hasta" value={endDate} onChange={handleDateChange} />
-                </div>
-            )}
+            <div className="filter-container">
+                <select onChange={handleFilterChange} className="filter-button">
+                    <option value="">Filtrar por</option>
+                    <option value="fecha">Fecha</option>
+                    <option value="tipo">Tipo de ejercicio</option>
+                </select>
+                {showDateInputs && (
+                    <div className="date-filters">
+                        <div className="date-input">
+                            <label>
+                                Desde:
+                                <input type="date" name="fecha_desde" value={startDate} onChange={handleDateChange} />
+                            </label>
+                        </div>
+                        <div className="date-input">
+                            <label>
+                                Hasta:
+                                <input type="date" name="fecha_hasta" value={endDate} onChange={handleDateChange} />
+                            </label>
+                        </div>
+                    </div>
+                )}
+                {showExerciseSelect && (
+                    <div className="exercise-select">
+                        <select onChange={handleExerciseChange} className="select-exercise">
+                            <option value="">Seleccionar</option>
+                            <option value="bicep">Bíceps</option>
+                            <option value="tricep">Tríceps</option>
+                            <option value="press_hombro">Press de hombro</option>
+                            <option value="sentadilla">Sentadilla</option>
+                        </select>
+                    </div>
+                )}
+            </div>
             <table className="historial-table">
                 <thead>
                     <tr>
@@ -97,10 +154,10 @@ function Historial() {
                     </tr>
                 </thead>
                 <tbody>
-                    {videos.map((video, index) => (
-                        <tr key={index}>
+                    {filteredVideos.map((video, index) => (
+                        <tr key={video._id}>
                             <td>
-                                <video width="320" height="240" controls preload="metadata">
+                                <video key={video._id} width="420" height="340" controls preload="metadata">
                                     <source src={video.url} type="video/mp4" />
                                 </video>
                             </td>
