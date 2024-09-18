@@ -88,7 +88,7 @@ function Historial() {
                     {videos.map((video, index) => (
                         <tr key={index}>
                             <td>
-                                <video width="320" height="240" controls>
+                                <video width="320" height="240" controls preload="metadata">
                                     <source src={video.url} type="video/mp4" />
                                 </video>
                             </td>

@@ -60,22 +60,37 @@
 }
 
 .historial-entrenador-container table {
-    width: 100%; /* Ancho completo de la tabla */
-    border-collapse: collapse; /* Los bordes de la tabla colapsados en uno solo */
-    background-color: #A5A6A7; /* Fondo gris claro de la tabla */
-    margin-left: auto; /* Alinear la tabla a la izquierda */
+    width: 100%; /* Ajuste del ancho */
+    border-collapse: separate; /* Esto permite el manejo independiente de bordes */
+    border-spacing: 0; /* Elimina el espacio entre las celdas */
+    margin: 20px auto; /* Centrado y espacio alrededor de la tabla */
+    background-color: transparent;
 }
 
-th, td {
+.historial-entrenador-container th, td {
+    border: none; /* Bordes negros para celdas y encabezados */
     padding: 8px; /* Espaciado dentro de celdas */
-    text-align: center; /* Alineación del texto al centro */
+    text-align: center; /* Alineación del texto al centro puede ayudar */
     vertical-align: middle; /* Asegura que el contenido de la celda se alinee verticalmente al medio */
 }
 
-th {
+.historial-entrenador-container th {
     background-color: #808080; /* Fondo gris oscuro para los encabezados */
+    color: white; /* Texto blanco para los encabezados */
+    border: 1px solid black; /* Fondo gris oscuro para los encabezados */; /* Fondo gris oscuro para los encabezados */
+}
+.historial-entrenador-container thead tr {
+    border-radius: 20px; /* Bordes redondeados para el bloque de encabezados */
 }
 
+.historial-entrenador-container th:first-child {
+    border-top-left-radius: 20px; /* Redondea solo la esquina superior izquierda */
+    border-bottom-left-radius: 20px; /* Redondea solo la esquina inferior izquierda */
+}
+.historial-entrenador-container th:last-child {
+    border-top-right-radius: 20px; /* Redondea solo la esquina superior derecha */
+    border-bottom-right-radius: 20px; /* Redondea solo la esquina inferior derecha */
+}
 .entrenador-header-container {
     display: flex;
     justify-content: space-between; /* Centrar el contenido horizontalmente */

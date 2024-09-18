@@ -1,8 +1,6 @@
 from flask import Blueprint, request, jsonify
 from backend.service.user_service import UserService
-from flask_jwt_extended import jwt_required, get_jwt_identity
-import json
-
+from flask_jwt_extended import jwt_required
 user_bp = Blueprint('user_bp', __name__, url_prefix='/api/user')
 @user_bp.route('/create', methods=['POST'])
 @jwt_required()

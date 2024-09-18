@@ -1,16 +1,14 @@
-from flask import jsonify
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from datetime import timedelta
-from flask import Flask, send_from_directory
-import os
+from flask import Flask
 from waitress import serve
 from backend.auth.auth_route import auth_bp
 from backend.routes.user_routes import user_bp
 from backend.routes.video_routes import video_bp
 from backend.routes.reporte_routes import reporte_bp
 
-from backend.database.db import get_db  # Cambiado de db a get_db
+from backend.database.db import get_db
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})

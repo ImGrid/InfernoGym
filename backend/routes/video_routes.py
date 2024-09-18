@@ -3,6 +3,7 @@ from backend.utils.file_handle import save_file, delete_file
 from backend.service.video_service import VideoService
 from flask_jwt_extended import jwt_required, get_jwt_identity
 import os
+from flask import Response
 from flask import current_app
 from flask import Flask
 video_bp = Blueprint('video_bp', __name__, url_prefix='/api/videos')
@@ -35,18 +36,18 @@ def get_video(video_id):
 
     video = VideoService.buscar_video_por_id(video_id)
     if video:
-        # Determina la ruta basada en el tipo de video solicitado
-        if tipo_video == 'procesado' and video.get('path_procesado'):
-            video_path = video['path_procesado']
-        else:
-            video_path = video['path']
-
-        # Verifica si el archivo existe antes de intentar enviarlo
+        video_path = video['path_procesado'] if tipo_video == 'procesado' and video.get('path_procesado') else video['path']
         if os.path.exists(video_path):
-            return send_from_directory(os.path.dirname(video_path), os.path.basename(video_path))
+            def generate():
+                with open(video_path, "rb") as video_file:
+                    while True:
+                        chunk = video_file.read(4096)
+                        if not chunk:
+                            break
+                        yield chunk
+            return Response(generate(), mimetype="video/mp4")
         else:
             return jsonify({"error": "File not found"}), 404
-
     else:
         return jsonify({"error": "Video not found"}), 404
 

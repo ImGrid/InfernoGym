@@ -1,6 +1,5 @@
 import os
 from werkzeug.utils import secure_filename
-import imghdr
 import magic
 
 # Configuración de la carpeta de subidas y extensiones de archivo permitidas
