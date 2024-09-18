@@ -25,7 +25,7 @@ app.register_blueprint(video_bp, url_prefix='/api/videos')
 app.register_blueprint(reporte_bp, url_prefix='/api/reportes')
 
 def start_server():
-    serve(app, host='0.0.0.0', port=5000, threads=24)
+    serve(app, host='0.0.0.0', port=5000, threads=32)
 
 if __name__ == '__main__':
     start_server()

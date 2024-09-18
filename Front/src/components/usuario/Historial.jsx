@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function Historial() {
     const [videos, setVideos] = useState([]);
     const navigate = useNavigate();
-    const [showRecent, setShowRecent] = useState(true);
+    const [filter, setFilter] = useState('');
     const formatDate = (dateString) => {
         try {
             return format(parseISO(dateString), 'MM/dd/yyyy');
@@ -21,29 +21,20 @@ function Historial() {
 
     useEffect(() => {
         loadVideos();
-    }, []);
+    }, [filter]);
 
     const loadVideos = async () => {
         const userId = JSON.parse(localStorage.getItem('user')).userId;
-        let fetchedVideos = await fetchVideosByUser(userId);
-
-        // Obtener las URLs en el orden original
+        const fetchedVideos = await fetchVideosByUser(userId);
         const videosWithUrls = await Promise.all(fetchedVideos.map(async video => {
             const url = await getVideoById(video._id);
             return { ...video, url };
         }));
-
-        // Decidir el orden basado en 'showRecent' y aplicarlo después de obtener las URLs
-        if (!showRecent) {
-            videosWithUrls.reverse();
-        }
-
         setVideos(videosWithUrls);
     };
 
-    const toggleShowRecent = () => {
-        setShowRecent(!showRecent);
-        loadVideos(); // Re-carga los videos en el nuevo orden
+    const handleFilterChange = (event) => {
+        setFilter(event.target.value);
     };
 
     const handleDeleteVideo = async (videoId) => {
@@ -76,6 +67,11 @@ function Historial() {
                 </div>
             </div>
             <h1>Historial de Usuario</h1>
+            <select onChange={handleFilterChange}>
+                <option value="">Filtrar por</option>
+                <option value="fecha">Fecha</option>
+                <option value="tipo">Tipo de ejercicio</option>
+            </select>
             <table className="historial-table">
                 <thead>
                     <tr>
