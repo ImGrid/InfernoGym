@@ -28,7 +28,6 @@ steps:
 substitutions:
   _PROJECT_ID: 'infernogym'
 
-# Opciones para aumentar el tiempo de espera si tu compilación necesita más tiempo
 timeout: '7200s'
 
 options:
