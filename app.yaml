@@ -2,15 +2,12 @@ runtime: python311
 entrypoint: python3 -m backend.app
 
 handlers:
-# Handler for static resources in the public folder
-- url: /public
-  static_dir: Front/public
+- url: /(.*\.(js|jsx|css|png|jpg|jpeg|svg|json|ico))$
+  static_files: Front/\1
+  upload: Front/.*\.(js|jsx|css|png|jpg|jpeg|svg|json|ico)$
 
-# Handler for JavaScript, CSS, images, and other static files inside src
-- url: /src
-  static_files: Front/src/\1
-  upload: Front/src/.*\.(js|jsx|css|png|jpg|jpeg|svg|json|ico)$
-
+- url: /.*
+  static_dir: Front
 # Handler for the main HTML entry point
 - url: /
   static_files: Front/index.html

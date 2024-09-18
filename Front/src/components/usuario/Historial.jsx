@@ -10,6 +10,9 @@ function Historial() {
     const [videos, setVideos] = useState([]);
     const navigate = useNavigate();
     const [filter, setFilter] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [showDateInputs, setShowDateInputs] = useState(false);
     const formatDate = (dateString) => {
         try {
             return format(parseISO(dateString), 'MM/dd/yyyy');
@@ -21,7 +24,7 @@ function Historial() {
 
     useEffect(() => {
         loadVideos();
-    }, [filter]);
+    }, [filter, startDate, endDate]);
 
     const loadVideos = async () => {
         const userId = JSON.parse(localStorage.getItem('user')).userId;
@@ -35,8 +38,15 @@ function Historial() {
 
     const handleFilterChange = (event) => {
         setFilter(event.target.value);
+        setShowDateInputs(event.target.value === 'fecha');
     };
-
+    const handleDateChange = (event) => {
+        if (event.target.name === 'fecha_desde') {
+            setStartDate(event.target.value);
+        } else if (event.target.name === 'fecha_hasta') {
+            setEndDate(event.target.value);
+        }
+    };
     const handleDeleteVideo = async (videoId) => {
         try {
             const reporte = await obtenerReportePorVideo(videoId);
@@ -67,11 +77,17 @@ function Historial() {
                 </div>
             </div>
             <h1>Historial de Usuario</h1>
-            <select onChange={handleFilterChange}>
+            <select onChange={handleFilterChange} className="filter-button">
                 <option value="">Filtrar por</option>
                 <option value="fecha">Fecha</option>
                 <option value="tipo">Tipo de ejercicio</option>
             </select>
+            {showDateInputs && (
+                <div>
+                    <input type="date" name="fecha_desde" value={startDate} onChange={handleDateChange} />
+                    <input type="date" name="fecha_hasta" value={endDate} onChange={handleDateChange} />
+                </div>
+            )}
             <table className="historial-table">
                 <thead>
                     <tr>

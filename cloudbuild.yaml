@@ -12,25 +12,21 @@ steps:
     args: ['run', 'build', '--prefix', 'Front']
 
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['cp', '-r', 'Front', 'gs://gyminferno_static']
+    args: ['cp', '-r', 'Front', 'gs://infernogym_static/Front']
 
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['cp', '-r', 'backend', 'gs://gyminferno_static/backend']
+    args: ['cp', '-r', 'backend', 'gs://infernogym_static/backend']
 
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['cp', '-r', 'path', 'gs://gyminferno_static/path']
+    args: [ 'cp', '-r', 'path', 'gs://gyminferno_static/path' ]
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-    args: ['app', 'deploy', 'app.yaml', '--project=gyminferno']
-
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args: ['app', 'deploy', 'app.yaml', '--project=gyminferno', '--quiet']
+    args: ['app', 'deploy', 'app.yaml', '--project=infernogym', '--quiet']
 
 # Variables de entorno requeridas para los pasos
 substitutions:
-  _PROJECT_ID: 'gyminferno'
+  _PROJECT_ID: 'infernogym'
 
 # Opciones para aumentar el tiempo de espera si tu compilación necesita más tiempo
 timeout: '7200s'
@@ -38,9 +34,4 @@ timeout: '7200s'
 options:
   machineType: 'E2_HIGHCPU_8'
 
-artifacts:
-  objects:
-    location: 'gs://gyminferno_artifacts/'
-    paths: ['Front/dist/**', 'backend/**', 'path/**']
-
-logsBucket: 'gs://gyminferno.appspot.com'
+logsBucket: 'gs://infernogym.appspot.com'

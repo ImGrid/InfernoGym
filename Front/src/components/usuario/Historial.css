@@ -127,3 +127,18 @@
     flex-grow: 1; /* Ocupar el espacio disponible en el encabezado */
     gap: 20px; /* Espacio entre botones */
 }
+.historial-container .filter-button {
+    background-color: #ff0000; /* Color rojo para el botón de filtro */
+    color: white;
+    padding: 10px 20px;
+    margin: 0 5px; /* Ajustar márgenes para alinear con otros botones si es necesario */
+    border-radius: 5px; /* Redondeado para coincidir con el estilo general */
+    border: none; /* Sin borde */
+    cursor: pointer;
+    width: 10%; /* Ajustar el ancho automáticamente al contenido */
+    transition: background-color 0.3s ease-in-out; /* Transición suave para el hover */
+}
+
+.historial-container .filter-button:hover {
+    background-color: #B71C1C; /* Color más oscuro para hover */
+}

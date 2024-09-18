@@ -3,8 +3,6 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
 from backend.entities.usuario import Usuario
-from datetime import datetime
-
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 
 
