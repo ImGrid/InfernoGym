@@ -18,7 +18,7 @@ steps:
     args: ['cp', '-r', 'backend', 'gs://infernogym_static/backend']
 
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: [ 'cp', '-r', 'path', 'gs://gyminferno_static/path' ]
+    args: [ 'cp', '-r', 'path', 'gs://infernogym_static/path' ]
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
