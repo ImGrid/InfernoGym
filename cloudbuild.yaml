@@ -1,5 +1,4 @@
 steps:
-  # Paso 1: Instalar dependencias de Python
   - name: 'python:3.11'
     entrypoint: pip
     args: ['install', '-r', 'backend/requirements.txt']
@@ -15,17 +14,12 @@ steps:
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', '-r', 'Front', 'gs://gyminferno_static']
 
-  # Copiar los archivos del backend al bucket
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', '-r', 'backend', 'gs://gyminferno_static/backend']
-    # Copiar toda la carpeta backend
 
-  # Incluir la carpeta path en el bucket
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', '-r', 'path', 'gs://gyminferno_static/path']
-    # Copiar toda la carpeta path
 
-  # Paso 7: Despliegue de la aplicación usando gcloud
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args: ['app', 'deploy', 'app.yaml', '--project=gyminferno']
@@ -41,15 +35,12 @@ substitutions:
 # Opciones para aumentar el tiempo de espera si tu compilación necesita más tiempo
 timeout: '7200s'
 
-# Definición de recursos para la compilación
 options:
   machineType: 'E2_HIGHCPU_8'
 
-# Especificaciones para almacenar imágenes construidas o artefactos
 artifacts:
   objects:
     location: 'gs://gyminferno_artifacts/'
     paths: ['Front/dist/**', 'backend/**', 'path/**']
-    # Incluir todos los archivos necesarios del backend y la carpeta path
 
 logsBucket: 'gs://gyminferno.appspot.com'
