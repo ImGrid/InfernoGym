@@ -5,6 +5,31 @@
     <link rel="icon" type="image/png" href="/gym.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>INFERNO GYM</title>
+    <style>
+        body {
+            background-image: url('/logo_gym.png'); /* Asegúrate de que la ruta sea correcta */
+            background-size: 55%; /* Reducir el tamaño de la imagen a 50% de su tamaño original */
+            background-position: calc(60% + 30px) -20vh; /* Centrar la imagen en el medio hacia arriba un poco */
+            background-repeat: no-repeat;
+            position: relative; /* Posición relativa para posicionar elementos internos */
+            min-height: 100vh; /* Asegura que el body tenga la altura de la ventana */
+        }
+
+        body::after {
+            content: 'Bienvenido al panel de control, Administrador';
+            position: absolute;
+            top: 55%; /* Aumenta el valor para mover el texto más abajo */
+            left: calc(55% + 30px);
+            transform: translateX(-50%);
+            font-size: 34px; /* Tamaño de la fuente del mensaje */
+            color: black; /* Color del texto */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para mejorar la legibilidad */
+            width: 40%; /* Ancho completo para centrar texto correctamente */
+            text-align: center; /* Alinear texto al centro */
+            font-family: 'Arial', sans-serif;
+            z-index: -1;
+        }
+    </style>
   </head>
   <body>
     <div id="root"></div>

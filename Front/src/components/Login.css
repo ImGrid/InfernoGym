@@ -18,7 +18,7 @@ body, html {
 .login-form-container {
     width: 400px; /* Ancho del formulario aumentado */
     padding: 2.5rem; /* Padding interno aumentado */
-    background: rgba(0, 0, 0, 0.85); /* Fondo verde con transparencia */
+    background: rgba(0, 0, 0, 0.95); /* Fondo verde con transparencia */
     border-radius: 15px; /* Bordes redondeados */
     box-shadow: 5px 20px 50px #000; /* Sombra para dar profundidad */
     font-family: 'Arial', sans-serif;

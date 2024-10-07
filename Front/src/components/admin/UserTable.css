@@ -1,4 +1,10 @@
 /* UserTable.css */
+.user-table-container {
+    background-color: #ffffff; /* Fondo blanco para todo el contenedor del componente UserTable */
+    width: 100%; /* Asegura que tome todo el ancho */
+    height: 100vh; /* Asegura que tome toda la altura de la vista */
+}
+
 .container {
     width: 95%;
     margin: 20px auto;
@@ -113,4 +119,23 @@ th:hover .dropdown-content {
 
 .download-button:hover {
     background-color: #0056b3;
+}
+
+/* Estilos para las opciones de filtro */
+.filter-options {
+    margin-left: 35px; /* Añadir más espacio a la izquierda de las opciones de filtro */
+    margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+.filter-options label {
+    display: inline-block;
+    margin-right: 15px; /* Espacio entre los filtros */
+    font-size: 16px;
+    color: #333;
+}
+
+/* Para un aspecto más limpio y moderno */
+.filter-options input {
+    margin-right: 5px;
 }

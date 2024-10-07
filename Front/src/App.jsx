@@ -5,11 +5,24 @@ import Login from './components/Login';
 import UsuarioDashboard from './components/usuario/UsuarioDashboard';
 import AdminDashboard from './components/admin/AdminDashboard';
 import EntrenadorDashboard from './components/entrenador/EntrenadorDashboard';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
     return (
         <AuthProvider>
             <Router>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    style={{ zIndex: 9999 }}
+                />
                   <Routes>
                        <Route path="/" element={<Login />} />
                        <Route path="/usuario/*" element={<ProtectedRoute role="usuario" Component={UsuarioDashboard} />} />

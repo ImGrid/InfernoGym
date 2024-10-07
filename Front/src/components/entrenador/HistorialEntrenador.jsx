@@ -4,11 +4,13 @@ import './HistorialEntrenador.css';
 import { format, parseISO } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import ComentarioModal from './ComentarioModal';
+import { toast } from 'react-toastify';
 
 function HistorialEntrenador() {
     const [videos, setVideos] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [viewedTimes, setViewedTimes] = useState({});
     const [selectedUserId, setSelectedUserId] = useState(null);
     const navigate = useNavigate();
     const formatDate = (dateString) => {
@@ -58,20 +60,36 @@ function HistorialEntrenador() {
 
     const loadVideos = async (userId) => {
         const fetchedVideos = await fetchVideosByUser(userId);
+        const initialTimes = {};
+        fetchedVideos.forEach(video => {
+            initialTimes[video._id] = false;  // Inicializa todos los videos como no vistos
+        });
+        setViewedTimes(initialTimes);  // Establece los tiempos de visualización iniciales
+
         if (fetchedVideos && fetchedVideos.length > 0) {
             const videosWithDetails = await Promise.all(fetchedVideos.map(async video => {
                 const url = await getVideoById(video._id, 'procesado');
                 const reporte = await obtenerReportePorVideo(video._id);
-                return { ...video, url, ...reporte, video_id: video._id};
+                return { ...video, url, ...reporte, video_id: video._id };
             }));
             setVideos(videosWithDetails);
         } else {
             setVideos([]);
         }
     };
+    const handleVideoPlay = (videoId) => {
+        setTimeout(() => {
+            setViewedTimes(prev => ({ ...prev, [videoId]: true }));  // Marca el video como visto después de 30 segundos
+        }, 10000);
+    };
 
-    const handleAddComments = async (videoId) => {
-        const reporte = await obtenerReportePorVideo(videoId);
+    const handleAddComments = (videoId) => {
+        if (!viewedTimes[videoId]) {
+            toast.warning('Debes ver al menos 30 segundos del video antes de comentar.');
+            return;
+        }
+
+        const reporte = videos.find(video => video.video_id === videoId);
         if (reporte) {
             setActiveReport(reporte);
             setActiveVideoId(videoId);
@@ -80,6 +98,7 @@ function HistorialEntrenador() {
             alert('No se pudo cargar el reporte del video.');
         }
     };
+
     return (
         <div className='historial-entrenador-container'>
             <div className="entrenador-header-container">
@@ -118,7 +137,7 @@ function HistorialEntrenador() {
                     {videos.map((video, index) => (
                         <tr key={index}>
                             <td>
-                                <video width="320" height="240" controls>
+                                <video width="320" height="240" controls onPlay={() => handleVideoPlay(video.video_id)}>
                                     <source src={video.url} type="video/mp4" />
                                 </video>
                             </td>
@@ -129,7 +148,7 @@ function HistorialEntrenador() {
                                 <p>Porcentaje de posición: {video.porcentaje_posicion.toFixed(2)}%</p>
                             </td>
                             <td className="actions">
-                                <button onClick={() => handleAddComments(video.video_id)}>Añadir Comentarios</button>
+                                <button disabled={!viewedTimes[video.video_id]} onClick={() => handleAddComments(video.video_id)}>Añadir Comentarios</button>
                             </td>
                         </tr>
                     ))}

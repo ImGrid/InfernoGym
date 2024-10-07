@@ -327,3 +327,26 @@ export const eliminarReporte = async (reporteId) => {
         throw error;
     }
 };
+
+export const processCameraFrame = async (imageData) => {
+    try {
+        const response = await fetch(`${API_URL_VIDEOS}/process_frame`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${getToken()}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ image: imageData })
+        });
+
+        if (!response.ok) {
+            const errMsg = await response.text();
+            throw new Error(`Frame processing failed: ${response.status} ${errMsg}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Frame processing error:", error);
+        throw error;
+    }
+};

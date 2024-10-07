@@ -129,9 +129,9 @@ def process_video(input_path, output_path):
                     cv2.putText(frame, f'Repeticiones: {repetitions}', (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 0), 8)
                     cv2.putText(frame, f'Repeticiones: {repetitions}', (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 0, 0), 2)
 
-                    cv2.putText(frame, f'Porcentaje de posicion: {similarity_percentage:.2f}%', (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 1.5,
+                    cv2.putText(frame, f'Posicion correcta: {similarity_percentage:.2f}%', (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 1.5,
                                 (0, 0, 0), 8)
-                    cv2.putText(frame, f'Porcentaje de posicion: {similarity_percentage:.2f}%', (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 1.5,
+                    cv2.putText(frame, f'Posicion correcta: {similarity_percentage:.2f}%', (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 1.5,
                                 (0, 255, 0), 2)
 
                 if out is None:
@@ -146,3 +146,81 @@ def process_video(input_path, output_path):
             pose.close()
             average_similarity = total_similarity / frame_count if frame_count > 0 else 0
             return repetitions, average_similarity
+
+
+def process_frame(frame):
+    # Inicialización de MediaPipe Pose con la configuración necesaria
+    pose = mp_pose.Pose(static_image_mode=False, model_complexity=1, enable_segmentation=False,
+                        min_detection_confidence=0.5)
+    # Carga de características de movimiento ideal desde el dataset
+    tfrecord_path = 'C:/Users/Lenovo/Desktop/OP_PROJECT/PoseEstimation/dataset/csv/exercise_data.tfrecord'
+    ideal_movement_features = load_tfrecord_data(tfrecord_path, label_filter=0)
+
+    # Estado inicial y acumuladores
+    estado_actual = 'Abajo'
+    repetitions = 0
+    total_similarity = 0
+    label_map = {0: 'Arriba', 1: 'Abajo'}
+
+    # Procesamiento del frame
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = pose.process(frame_rgb)
+
+    if results.pose_landmarks:
+        mp_drawing.draw_landmarks(
+            frame, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
+            landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
+
+        connection_spec = mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2)
+        mp_drawing.draw_landmarks(
+            frame,
+            results.pose_landmarks,
+            connections=[(mp_pose.PoseLandmark.LEFT_SHOULDER, mp_pose.PoseLandmark.LEFT_ELBOW),
+                         (mp_pose.PoseLandmark.LEFT_ELBOW, mp_pose.PoseLandmark.LEFT_WRIST)],
+            landmark_drawing_spec=None,  # No cambiar el color de los puntos
+            connection_drawing_spec=connection_spec)
+
+        # Extracción de keypoints y predicción del modelo
+        keypoints = extract_keypoints(results)
+        if len(keypoints) == 9:
+            keypoints = keypoints.reshape(1, 1, 9)
+            prediction = model.predict(keypoints, verbose=0)
+            class_id = np.argmax(prediction)
+            label = label_map.get(class_id, 'Desconocido')
+
+            # Actualización del estado y contador de repeticiones
+            if label in ['Arriba', 'Abajo']:
+                if estado_actual == 'Abajo' and label == 'Arriba':
+                    estado_actual = 'Arriba'
+                elif estado_actual == 'Arriba' and label == 'Abajo':
+                    estado_actual = 'Abajo'
+                    repetitions += 1
+
+            # Cálculo de ángulo y correlación
+            angle = calculate_angle(keypoints[0, 0, 0:3], keypoints[0, 0, 3:6], keypoints[0, 0, 6:9])
+            elbow_x = int(keypoints[0, 0, 3] * frame.shape[1])
+            elbow_y = int(keypoints[0, 0, 4] * frame.shape[0])
+            correlation = calculate_correlation(keypoints, ideal_movement_features[0])
+            similarity_percentage = correlation * 100
+            total_similarity += similarity_percentage
+
+            # Anotación en el frame con los datos calculados
+            cv2.putText(frame, f' {int(angle)}', (elbow_x, elbow_y), cv2.FONT_HERSHEY_SIMPLEX,
+                        1.5, (0, 0, 0), 4)  # Texto en negro con borde más grueso
+            cv2.putText(frame, f' {int(angle)}', (elbow_x, elbow_y), cv2.FONT_HERSHEY_SIMPLEX,
+                        1.5, (0, 0, 255), 2)  # Texto en rojo
+            cv2.putText(frame, f'Repeticiones: {repetitions}', (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 0), 8)
+            cv2.putText(frame, f'Repeticiones: {repetitions}', (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 0, 0), 2)
+
+            cv2.putText(frame, f'Posicion correcta: {similarity_percentage:.2f}%', (10, 150), cv2.FONT_HERSHEY_SIMPLEX,
+                        1.5,
+                        (0, 0, 0), 8)
+            cv2.putText(frame, f'Posicion correcta: {similarity_percentage:.2f}%', (10, 150), cv2.FONT_HERSHEY_SIMPLEX,
+                        1.5,
+                        (0, 255, 0), 2)
+
+    # Limpieza de los recursos de MediaPipe
+    pose.close()
+
+    # Devolución del frame procesado y las métricas calculadas
+    return frame, estado_actual, repetitions, total_similarity

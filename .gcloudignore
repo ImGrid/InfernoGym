@@ -17,11 +17,6 @@ __pycache__/
 # Node.js dependencies
 node_modules/
 
-# Frontend build artifacts
-/dist/
-/build/
-/public/
-
 # Virtual environments
 venv/
 env/

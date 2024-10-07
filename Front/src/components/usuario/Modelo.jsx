@@ -9,30 +9,122 @@ function Modelo() {
     const [file, setFile] = useState(null);
     const [uploading, setUploading] = useState(false);
     const [currentGif, setCurrentGif] = useState('bicep.gif');
-    const [currentDescription, setCurrentDescription] = useState('Grabate a ti mismo de PERFIL IZQUIERDO realizando el ejercicio de curl de bicep con barra como se muestra en el ejemplo, los puntos clave que reconocera en este ejercicio son tu hombro, codo y muñeca izquierda');
+    const [currentDescription, setCurrentDescription] = useState('Para grabarte realizando el ejercicio de curl de bicep con barra, primero debes grabarte de pefil izquierdo como se puede observar en el ejemplo, para que el modelo reconozca mejor tu cuerpo puedes grabarte de manera horizontal');
     const [currentExercise, setCurrentExercise] = useState('bicep');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [currentIcon, setCurrentIcon] = useState('');
+
     const navigate = useNavigate();
 
+    const handlePreUploadCheck = () => {
+        if (localStorage.getItem('noShowUploadPrompt')) return handleUpload();
 
-    const gifs = {
-        bicep: { gif: 'bicep.gif', description: 'Grabate a ti mismo de PERFIL IZQUIERDO realizando el ejercicio de curl de bicep con barra como se muestra en el ejemplo' },
-        sentadilla: { gif: 'sentadilla.gif', description: 'Grabate a ti mismo de perfil del lado derecho para que la IA pueda calcular los puntos clave del ejercicio de sentadilla' },
-        hombros: { gif: 'hombros.gif', description: 'Grabate a ti mismo de de frente realizando el ejercicio de press de hombros como se muestra en el ejemplo' },
-        triceps: { gif: 'triceps.gif', description: 'Grabate a ti mismo de perfil derecho realizando el ejercicio de extension de triceps en polea como se muestra en el ejemplo' }
+        const customId = "pre-upload-check";
+        toast.warn(
+            <div style={{ fontSize: '16px' }}>
+                Espera, antes de subir el video, ¿leíste los consejos?
+                <div style={{ marginTop: '10px' }}>
+                    <button style={{
+                        marginRight: '5px',
+                        padding: '5px 10px',
+                        border: 'none',
+                        backgroundColor: '#4CAF50',
+                        color: 'white',
+                        cursor: 'pointer',
+                        borderRadius: '5px'
+                    }} onClick={() => handleUploadDecision(true)}>Sí</button>
+                    <button style={{
+                        padding: '5px 10px',
+                        border: 'none',
+                        backgroundColor: '#f44336',
+                        color: 'white',
+                        cursor: 'pointer',
+                        borderRadius: '5px'
+                    }} onClick={() => handleUploadDecision(false)}>No</button>
+                </div>
+                <div style={{ marginTop: '10px' }}>
+                    <input type="checkbox" id="noShow" name="noShow" onChange={handleCheckbox} />
+                    <label htmlFor="noShow">No volver a mostrar</label>
+                </div>
+            </div>,
+            {
+                position: "top-center",
+                autoClose: false,
+                closeOnClick: false,
+                draggable: true,
+                closeButton: true,
+                toastId: customId
+            }
+        );
+    };
+    const handleUploadDecision = (proceed) => {
+        toast.dismiss();
+        if (proceed) {
+            handleUpload();
+        } else {
+            scrollToConsejosSection();
+        }
     };
 
-    const handleFileChange = (event) => {
+    const scrollToConsejosSection = () => {
+        document.querySelector('.consejos-section').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const handleCheckbox = (e) => {
+        localStorage.setItem('noShowUploadPrompt', e.target.checked ? 'true' : '');
+    };
+    const gifs = {
+        bicep: { gif: 'bicep.gif', description: 'Para grabarte realizando el ejercicio de curl de bicep con barra, primero debes grabarte de pefil izquierdo como se puede observar en el ejemplo, para que el modelo modelo reconozca mejor tu cuerpo puedes grabarte de manera vertical como indica la figura de arriba' },
+        sentadilla: { gif: 'sentadilla.gif', description: 'Para grabarte realizando el ejercicio de sentadilla, primero debes grabarte de pefil derecho como se puede observar en el ejemplo, para que el modelo modelo reconozca mejor tu cuerpo puedes grabarte de manera vertical como indica la figura de arriba' },
+        hombros: { gif: 'hombros.gif', description: 'Para grabarte realizando el ejercicio de press de hombros, primero debes grabarte de frente como se puede observar en el ejemplo , para que el modelo modelo reconozca mejor tu cuerpo puedes grabarte de manera horizontal como indica la figura de arriba' },
+        triceps: { gif: 'triceps.gif', description: 'Para grabarte realizando el ejercicio de triceps, primero debes grabarte de pefil derecho como se puede observar en el ejemplo, para que el modelo modelo reconozca mejor tu cuerpo puedes grabarte de manera vertical como indica la figura de arriba' }
+    };
+
+    const handleFileChange = async (event) => {
         const file = event.target.files[0];
         if (file) {
             // Convertir bytes a MB
             const fileSizeInMB = file.size / 1024 / 1024;
-            if (fileSizeInMB > 100) {
-                toast.error("El archivo excede el tamaño máximo permitido de 100 MB.");
+            if (fileSizeInMB > 200) {
+                toast.error("El archivo excede el tamaño máximo permitido de 200 MB.");
                 return; // Terminar la ejecución si el archivo es demasiado grande
             }
-            setFile(file);
+
+            // Validar duración del video
+            const videoURL = URL.createObjectURL(file);
+            const videoElement = document.createElement('video');
+            videoElement.src = videoURL;
+
+            videoElement.addEventListener('loadedmetadata', () => {
+                if (videoElement.duration > 90) {  // 90 segundos
+                    toast.error("El video no debe durar más de 1 minuto y 30 segundos.");
+                    URL.revokeObjectURL(videoURL);  // Limpieza
+                    return;
+                }
+                setFile(file);
+                URL.revokeObjectURL(videoURL);  // Limpieza
+            });
         }
+    };
+    const [scrollPosition, setScrollPosition] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const position = window.pageYOffset;
+            setScrollPosition(position);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    // Ajustamos la escala y la opacidad de manera más notable
+    const dynamicStyle = {
+        opacity: Math.max(0.3, 1 - scrollPosition / 300),  // Ajuste para hacer la transición más lenta
+        transform: `scale(${Math.max(0.8, 1 - scrollPosition / 5000)})`  // Escala menos drástica
     };
 
     const handleUpload = async () => {
@@ -48,7 +140,7 @@ function Modelo() {
             setCurrentGif('');
             setCurrentDescription('');
         } catch (e) {
-            toast.error(e.message); // Mostrar el mensaje de error retornado por la API o la función de expiración del token
+            toast.error(e.message);
         }
         setUploading(false);
     };
@@ -58,12 +150,20 @@ function Modelo() {
         setCurrentGif(gifs[exercise].gif);
         setCurrentDescription(gifs[exercise].description);
         setCurrentExercise(exercise);
+        let iconPath = '';
+        if (exercise === 'hombros') {
+            iconPath = '/public/horizontal.png';
+        } else {
+            iconPath = '/public/vertical.png';
+        }
+        setCurrentIcon(iconPath);
     };
+
     const scrollToUploadSection = () => {
         document.querySelector('.upload-section').scrollIntoView({ behavior: 'smooth' });
     };
     return (
-        <div className="modelo-container">
+        <div className="modelo-container" style={{ background: 'radial-gradient(circle, #2A2A2A 10%, #0A0A0A 100%)' }}>
             <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className="header-container">
                 <img src="/logo_gym.png" alt="Logo del gimnasio" className="logo"/>
@@ -78,7 +178,7 @@ function Modelo() {
                     }} disabled={uploading}>Salir</button>
                 </div>
             </div>
-            <div className="welcome-section">
+            <div className="welcome-section" style={dynamicStyle}>
                 <h1>BIENVENIDO AL GIMNASIO INFERNO GYM </h1>
                 <p>Empieza tu entrenamiento con nosotros y prueba el nuevo modelo de reconocimiento de postura</p>
                 <button onClick={scrollToUploadSection} className="button-base probar-ahora-button">
@@ -101,6 +201,11 @@ function Modelo() {
                     <div className="instruccion-text">
                         <h1>¿COMO USAR EL MODELO DE RECONOCIMIENTO?</h1>
                         <p>Puedes grabarte con tu celular u otro dispositivo realizando los ejercicios como indica el ejemplo para luego subir ese video a la pagina, recuerda que debes grabarte desde un angulo en el que se vea todo tu cuerpo</p>
+                        <button
+                            style={{ padding: '10px 20px', marginTop: '20px', backgroundColor: 'blue', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
+                            onClick={() => navigate('/usuario/experimental')}>
+                            Ir a Experimental
+                        </button>
                 </div>
             </div>
             <div id="uploadSection" className="upload-section">
@@ -118,7 +223,7 @@ function Modelo() {
                         {uploading && <p>Cargando...</p>}
                     </div>
                 </div>
-                <button className="upload-button" onClick={handleUpload}>Subir Video</button>
+                <button className="upload-button" onClick={handlePreUploadCheck}>Subir Video</button>
                 <div className="exercise-button-container">
                     <button onClick={() => handleExerciseClick('bicep')} className="exercise-button">Curl de Bicep</button>
                     <button onClick={() => handleExerciseClick('sentadilla')} className="exercise-button">Sentadilla</button>
@@ -129,11 +234,35 @@ function Modelo() {
                     {currentGif && (
                         <>
                             <img src={`/public/${currentGif}`} alt="Exercise Gif" className="exercise-gif"/>
-                            <p className="exercise-description">{currentDescription}</p>
+                            <div className="exercise-description">
+                                <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                                    <img src={currentIcon} alt="" className="glow-image-effect" style={{ width: '50px' }} />
+                                </div>
+                                <p>{currentDescription}</p>
+                            </div>
                         </>
                     )}
                 </div>
             </div>
+            <div className="consejos-section">
+                <h1 className="consejos-title">Consejos Antes de Subir el Video</h1>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}>
+                    <div className="consejo-image-container">
+                        <img src="/public/pesas.png" alt="Pesas" className="consejo-image" />
+                        <p>Si no puedes grabarte solo puedes pedir ayuda a alguien para que te grabe o te diga como hacer el ejercicio</p>
+                    </div>
+                    <div className="consejo-image-container">
+                        <img src="/public/roto.png" alt="Equipo roto" className="consejo-image" />
+                        <p>No subas videos que duren mas de 2 minutos o que sean muy pesados</p>
+                    </div>
+                    <div className="consejo-image-container">
+                        <img src="/public/oculto.png" alt="Equipo oculto" className="consejo-image" />
+                        <p>Cuando te grabes trata de que no haya algún objeto entremedio que dificulte reconocer tu cuerpo</p>
+                    </div>
+                </div>
+            </div>
+
+
             <footer className="footer-container">
                 <div className="footer-map">
                     <iframe

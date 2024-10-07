@@ -1,9 +1,9 @@
 .create-user-container {
     background: white;
-    padding: 40px; /* Espacio interno aumentado */
+    padding: 50px; /* Espacio interno aumentado */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
+    margin: 30px auto;
     display: flex;
     flex-direction: column;
     color: black; /* Texto en color negro */
@@ -12,6 +12,7 @@
     justify-content: center;
     align-items: center; /* Centra los elementos horizontalmente */
     font-family: 'Arial', sans-serif; /* Estilo de letra moderno y legible */
+
 }
 .create-user-header {
     width: 100%; /* Utiliza todo el ancho del contenedor */

@@ -67,16 +67,16 @@
     background-color: #333; /* Gris oscuro al pasar el cursor */
 }
 .logo {
-    height: 140px; /* Altura fija para el logo */
-    width: 140; /* Ancho automático basado en la proporción del logo */
+    height: 140px;
+    width: 140;
 }
 
 .button-container {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centra los botones horizontalmente */
-    flex-grow: 1; /* Ocupar el espacio disponible en el encabezado */
-    gap: 20px; /* Espacio entre botones */
+    justify-content: center;
+    flex-grow: 1;
+    gap: 20px;
 }
 .welcome-section {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 40%, transparent 70%), url('/gym1.jpg') no-repeat center center; /* Ajusta la URL según sea necesario */    background-size: cover; /* Cubre el área sin estirar la imagen */
@@ -110,9 +110,7 @@
     flex-direction: row; /* Alinea los elementos en fila */
     align-items: center; /* Centra verticalmente */
     justify-content: center; /* Centra horizontalmente */
-    padding: 90px 20px; /* Espacio alrededor del contenido */
-    background: radial-gradient(circle, #2A2A2A 10%, #0A0A0A 100%);
-    border-bottom: 2px solid #444; /* Línea de separación estilizada */
+    padding: 90px 20px;
 }
 
 .instruccion-image {
@@ -157,7 +155,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 90px 0;
+    margin: 40px 0;
 }
 
 .upload-container {
@@ -193,14 +191,16 @@
     display: flex;
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */
-    width: 100%; /* Asegura que ocupa todo el ancho disponible */
-    margin-top: 20px; /* Espacio arriba del contenedor para separarlo de los botones */
+    width: 100%;
+    margin-top: 30px;
     gap: 30px; /* Espacio entre el GIF y la descripción */
+
 }
 
 .exercise-gif {
     max-width: 50%; /* Máximo 50% del ancho para no sobrepasar el espacio */
     height: auto; /* Mantiene la proporción del GIF */
+    border-radius: 5px;
 }
 
 .exercise-description {
@@ -318,3 +318,145 @@ h1, p {
 }
 
 
+.glow-image-effect {
+    filter: drop-shadow(0 0 4px white) drop-shadow(0 0 10px white); /* Dos capas de sombra para un resplandor más intenso */
+    transition: filter 0.1s ease-in-out; /* Transición suave al cambiar el estado */
+}
+
+.glow-image-effect:hover {
+    filter: drop-shadow(0 0 20px cyan) drop-shadow(0 0 30px cyan); /* Cambio de color y tamaño de sombra al pasar el ratón */
+}
+
+.icon-animation {
+  animation: pulse 2s infinite; /* Cambia 2s por la duración deseada de la animación */
+}
+.consejos-section {
+    display: flex;
+    flex-direction: column; /* Mantiene los elementos organizados en columna */
+    align-items: center; /* Centra los elementos horizontalmente al centro */
+    justify-content: center; /* Centra los elementos verticalmente */
+    padding: 40px 20px; /* Espacio alrededor del contenido */
+}
+
+.consejos-title {
+    width: 100%; /* Ocupa todo el ancho */
+    text-align: center; /* Título centrado horizontalmente */
+    color: white; /* Color de texto */
+    padding: 20px 0; /* Espacio vertical alrededor del título */
+    font-size: 3.5em; /* Tamaño del título */
+    background: -webkit-linear-gradient(orange, red); /* Gradiente de naranja a rojo */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+.consejo-image-container {
+    flex: 1; /* Espacio igual para cada imagen */
+    text-align: center; /* Centra el contenido textual */
+    padding: 80px; /* Espaciado interior */
+}
+
+.consejo-image {
+    width: 100%; /* Ajuste el ancho relativo dentro del contenedor para uniformidad */
+    max-width: 200px; /* Límite máximo para asegurar que no sean demasiado grandes */
+    height: auto; /* Mantener la proporción original */
+}
+
+.consejo-image-container p {
+    max-width: 500px; /* Máximo ancho del texto para no extenderse más que la imagen */
+    color: white; /* Color del texto */
+    font-size: 1.2em; /* Tamaño de la fuente */
+    text-align: center; /* Texto centrado */
+    margin-top: 30px; /* Espacio entre la imagen y el texto */
+}
+
+
+/* Media Queries para ajustar el diseño a diferentes tamaños de pantalla */
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .logo {
+        width: 100px; /* Ajustar tamaño del logo */
+        height: auto; /* Mantener proporción */
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .welcome-section {
+        padding: 50px 20px;
+        height: auto;
+        text-align: center;
+    }
+
+    .welcome-section h1 {
+        font-size: 2em;
+    }
+
+    .welcome-section p {
+        font-size: 1.2em;
+    }
+
+    .instruccion-section {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .instruccion-image, .instruccion-text {
+        max-width: 100%;
+    }
+
+    .upload-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .upload-button, .exercise-button {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .consejos-section {
+        padding: 20px;
+    }
+
+    .consejo-image-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-info {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-section h1 {
+        font-size: 1.5em;
+    }
+
+    .welcome-section p {
+        font-size: 1em;
+    }
+
+    .instruccion-text h1, .instruccion-text p {
+        font-size: 1.2em;
+    }
+
+    .exercise-description {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}

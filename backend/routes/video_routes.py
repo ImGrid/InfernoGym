@@ -3,6 +3,10 @@ from backend.utils.file_handle import save_file, delete_file
 from backend.service.video_service import VideoService
 from flask_jwt_extended import jwt_required, get_jwt_identity
 import os
+import base64
+import numpy as np
+import cv2
+from backend.script.bicep_pose import process_frame
 from flask import Response
 from flask import current_app
 from flask import Flask
@@ -76,3 +80,29 @@ def delete_video(video_id):
             return jsonify({"error": "Failed to delete video file"}), 400
     else:
         return jsonify({"error": "Video not found"}), 404
+
+
+@video_bp.route('/process_frame', methods=['POST'])
+def process_frame_endpoint():
+    data = request.json
+    if not data or 'image' not in data:
+        return jsonify({'error': 'No image provided'}), 400
+
+    try:
+        image_data = data['image']
+        image_data = image_data.split(';base64,')[-1]
+        decoded = base64.b64decode(image_data)
+        nparr = np.frombuffer(decoded, np.uint8)
+        frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    except Exception as e:
+        return jsonify({'error': 'Invalid image data'}), 400
+
+    # Procesar el frame con la función de análisis
+    processed_frame, estado_actual, repetitions, similarity_percentage = process_frame(frame)
+
+    # Devolver los resultados procesados
+    return jsonify({
+        'estado_actual': estado_actual,
+        'repetitions': repetitions,
+        'similarity_percentage': similarity_percentage
+    }), 200
