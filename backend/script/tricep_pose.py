@@ -35,7 +35,7 @@ def calculate_angle(a, b, c):
     return angle
 
 # Cargar el modelo entrenado
-model = load_model('C:/Users/Lenovo/Desktop/OP_PROJECT/PoseEstimation/dataset/model_coord_V2.h5')
+model = load_model('../model_coord_V2.h5')
 
 def _parse_function(proto):
     feature_description = {
@@ -66,7 +66,7 @@ def process_video(input_path, output_path):
                         min_detection_confidence=0.5)
     cap = cv2.VideoCapture(input_path)
     out = None
-    tfrecord_path = 'C:/Users/Lenovo/Desktop/OP_PROJECT/PoseEstimation/dataset/csv/exercise_data.tfrecord'
+    tfrecord_path = '/exercise_data.tfrecord'
     ideal_movement_features = load_tfrecord_data(tfrecord_path, label_filter=4)
     estado_actual = 'Arriba'
     repetitions = 0

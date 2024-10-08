@@ -199,13 +199,9 @@ function Modelo() {
                     <img src="/public/gym3.gif" alt="Instrucción" />
                     </div>
                     <div className="instruccion-text">
-                        <h1>¿COMO USAR EL MODELO DE RECONOCIMIENTO?</h1>
-                        <p>Puedes grabarte con tu celular u otro dispositivo realizando los ejercicios como indica el ejemplo para luego subir ese video a la pagina, recuerda que debes grabarte desde un angulo en el que se vea todo tu cuerpo</p>
-                        <button
-                            style={{ padding: '10px 20px', marginTop: '20px', backgroundColor: 'blue', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
-                            onClick={() => navigate('/usuario/experimental')}>
-                            Ir a Experimental
-                        </button>
+                        <h1>¿COMO FUNCIONA POR DETRAS DEL MODELO DE RECONOCIMIENTO?</h1>
+                        <p>Si te interesa probar el modelo en tiempo real puedes acceder a esta funcionalidad experimental, esta funcionalidad reconoce tu cuerpo y el ejercicio que esta realizando en tiempo real</p>
+
                 </div>
             </div>
             <div id="uploadSection" className="upload-section">

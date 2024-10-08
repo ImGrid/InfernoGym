@@ -11,18 +11,6 @@ function App() {
     return (
         <AuthProvider>
             <Router>
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    style={{ zIndex: 9999 }}
-                />
                   <Routes>
                        <Route path="/" element={<Login />} />
                        <Route path="/usuario/*" element={<ProtectedRoute role="usuario" Component={UsuarioDashboard} />} />

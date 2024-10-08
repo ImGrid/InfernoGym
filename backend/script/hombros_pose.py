@@ -51,7 +51,7 @@ def calculate_angle(a, b, c):
     return angle
 
 # Cargar el modelo entrenado
-model = load_model('C:/Users/Lenovo/Desktop/OP_PROJECT/PoseEstimation/dataset/model_coord_V2.h5')
+model = load_model('../model_coord_V2.h5')
 
 # Procesar el video
 cap = cv2.VideoCapture(r'C:\Users\Lenovo\Desktop\videos_dataset\press_hombro\h3.mp4')
@@ -79,7 +79,7 @@ def calculate_correlation(coords1, coords2):
         coords2 = coords2.flatten()
     return np.corrcoef(coords1, coords2)[0, 1]
 
-tfrecord_path = 'C:/Users/Lenovo/Desktop/OP_PROJECT/PoseEstimation/dataset/csv/exercise_data.tfrecord'
+tfrecord_path = '/exercise_data.tfrecord'
 ideal_movement_features = load_tfrecord_data(tfrecord_path, label_filter=1)
 
 estado_actual_izq = 'Arriba'
@@ -93,6 +93,9 @@ label_map = {
     4: 'Arriba_izquierda',
     5: 'Abajo_izquierda'
 }
+
+
+
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
