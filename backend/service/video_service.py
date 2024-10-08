@@ -1,11 +1,11 @@
 import os
 from bson.objectid import ObjectId
-from backend.database.db import get_db
-from backend.service.reporte_service import ReporteService
-from backend.entities.video import Video
-from backend.script.sentadilla_pose import process_video as process_sentadilla
-from backend.script.bicep_pose import process_video as process_bicep
-from backend.script.tricep_pose import process_video as process_tricep
+fromdatabase.db import get_db
+from service.reporte_service import ReporteService
+from entities.video import Video
+from script.sentadilla_pose import process_video as process_sentadilla
+from script.bicep_pose import process_video as process_bicep
+from script.tricep_pose import process_video as process_tricep
 db = get_db()
 
 class VideoService:

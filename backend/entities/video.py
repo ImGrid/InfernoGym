@@ -1,4 +1,4 @@
-from backend.database.db import get_db
+from database.db import get_db
 from datetime import datetime
 from bson.objectid import ObjectId
 db = get_db()

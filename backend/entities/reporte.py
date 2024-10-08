@@ -1,6 +1,6 @@
 from datetime import datetime
 from bson.objectid import ObjectId
-from backend.database.db import get_db
+from database.db import get_db
 db = get_db()
 
 class Reporte:

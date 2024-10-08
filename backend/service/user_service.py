@@ -1,4 +1,4 @@
-from backend.entities.usuario import Usuario
+from entities.usuario import Usuario
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 class UserService:

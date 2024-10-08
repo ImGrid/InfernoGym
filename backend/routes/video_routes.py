@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, send_from_directory
-from backend.utils.file_handle import save_file, delete_file
-from backend.service.video_service import VideoService
+from utils.file_handle import save_file, delete_file
+from service.video_service import VideoService
 from flask_jwt_extended import jwt_required, get_jwt_identity
 import os
 import base64

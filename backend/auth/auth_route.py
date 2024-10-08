@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
-from backend.entities.usuario import Usuario
+from entities.usuario import Usuario
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 
 

@@ -1,4 +1,4 @@
-from backend.entities.reporte import Reporte
+from entities.reporte import Reporte
 
 class ReporteService:
     @staticmethod

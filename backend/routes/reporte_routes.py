@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from backend.service.reporte_service import ReporteService
+from service.reporte_service import ReporteService
 from flask_jwt_extended import jwt_required
 
 reporte_bp = Blueprint('reporte_bp', __name__, url_prefix='/api/reportes')
