@@ -1,0 +1,1 @@
+La pagina aun sigue en desarrollo los modelos actuales reconocen 4 posturas, sentadilla, extensión de triceps, curl de biceps y press de hombros, para entrenar estos modelos use varios videos de estos ejercicios y lo que hice fue recolectar su keypoints para entrenar el modelo y pueda predecir dichos keypoints
